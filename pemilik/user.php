@@ -181,7 +181,7 @@ if($_SESSION['level']=="") {
                                     <h4 class="card-title">Edit Profile</h4>
                                 </div>
                                 <div class="card-body">
-                                    <form action="update.php?username=<?php echo $data['username'];?> " method="post">
+                                    <form action="php/update_profile.php?id_user=<?php echo $data['id_user'];?> " method="post">
                                         <div class="row">
                                             <div class="col-md-5 pr-1">
                                                 <div class="form-group">
@@ -238,7 +238,7 @@ if($_SESSION['level']=="") {
                                 <div class="card-body">
                                     <div class="author">
                                         <a href="#">
-                                            <img class="avatar border-gray" src="../assets/img/faces/face-3.jpg" alt="...">
+                                            <img class="avatar border-gray" src="assets/img/faces/face-3.jpg" alt="...">
                                             <h5 class="title"><?php echo $data['nama']; ?></h5>
                                         </a>
                                         <p class="description">

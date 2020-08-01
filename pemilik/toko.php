@@ -159,15 +159,12 @@ if($_SESSION['level']=="") {
             <?php
                 include "../koneksi.php";
                 $id_user = $_SESSION['id_user'];
-
+                
                 $query = "SELECT * FROM konter_servis WHERE id_user='$id_user'";
-                $hasil = mysqli_query ($conn, $query);
-                //mysqli_error($id_user);
-                if (!$hasil) die ("Gagal query ...");
-                    
-                $data = mysqli_fetch_array($hasil);
-                //print_r($data);
-
+                $hasil	= mysqli_query($conn, $query);
+                if (!$hasil){
+                    die("Gagal AMbil Data...");
+                }
             ?>
 
             <div class="content">
@@ -178,8 +175,12 @@ if($_SESSION['level']=="") {
                                 <div class="card-header ">
                                     <h4 class="card-title">Daftar User</h4>
                                     <p class="card-category">Daftar Pemilik Dan Pengunjung Teregistrasi</p>
+                                    <a class="nav-link" href="tambah_toko.php">
+                                        <button type="submit" name="add" class="btn btn-info btn-sm btn-fill pull-right" margin>Tamabah Toko</button>
+                                    </a>
                                 </div>
                                 <div class="card-body table-full-width table-responsive">
+                                
                                     <table class="table table-hover table-striped">
                                         <thead>
                                             <th>No</th>
@@ -202,8 +203,9 @@ if($_SESSION['level']=="") {
                                                         ."<td>".$data['antar_jemput']."</td>"
                                                         ."<td>".$data['longtitude']."</td>"
                                                         ."<td>".$data['latitude']."</td>"
-                                                        ."<td>
-                                                            <a href='hapus.php?id_user=".$data['id_user']."' class='btn btn-danger btn-sm'>Hapus</a>
+                                                        ."<td>                                                            
+                                                            <a href='edit_toko.php?id_konter=".$data['id_konter']."' class='btn btn-primary btn-fill btn-sm'>Edit</a>
+                                                            <a href='php/hapus_toko.php?id_konter=".$data['id_konter']."' class='btn btn-danger btn-fill btn-sm'>Hapus</a>
                                                         </td>";
                                                     echo "</tr>";
                                                 }

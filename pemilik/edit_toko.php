@@ -1,12 +1,10 @@
 <?php
 session_start();
 if($_SESSION['level']=="") {
-    header("Location: ../admin/user.php");
+    header("Location: ../login/login.php");
 }
 
 ?>
-
-
 <!--
 =========================================================
  Light Bootstrap Dashboard - v2.0.1
@@ -43,7 +41,7 @@ if($_SESSION['level']=="") {
 
 <body>
     <div class="wrapper">
-        <div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
+        <div class="sidebar" data-image="assets/img/sidebar-5.jpg">
             <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
@@ -62,16 +60,16 @@ if($_SESSION['level']=="") {
                             <p>Dashboard</p>
                         </a>
                     </li>
-                    <li class="nav-item active">
+                    <li>
                         <a class="nav-link" href="user.php">
                             <i class="nc-icon nc-circle-09"></i>
                             <p>User Profile</p>
                         </a>
                     </li>
-                    <li>
-                        <a class="nav-link" href="table.php">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="toko.php">
                             <i class="nc-icon nc-notes"></i>
-                            <p>Table List</p>
+                            <p> Profil Toko</p>
                         </a>
                     </li>
                     <li>
@@ -93,7 +91,7 @@ if($_SESSION['level']=="") {
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#pablo"> User </a>
+                    <a class="navbar-brand" href="#pablo"> Table List </a>
                     <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-bar burger-lines"></span>
                         <span class="navbar-toggler-bar burger-lines"></span>
@@ -157,113 +155,80 @@ if($_SESSION['level']=="") {
                 </div>
             </nav>
             <!-- End Navbar -->
-            
+
             <?php
                 include "../koneksi.php";
-                $id_user = $_SESSION['id_user'];
+                $id_konter = $_GET['id_konter'];
 
-                $query = "SELECT * FROM user WHERE id_user = '$id_user'";
+                $query = "SELECT * FROM konter_servis WHERE id_konter='$id_konter'";
                 $hasil = mysqli_query ($conn, $query);
                 //mysqli_error($id_user);
                 if (!$hasil) die ("Gagal query ...");
                     
                 $data = mysqli_fetch_array($hasil);
                 //print_r($data);
-
+                
             ?>
 
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">Edit Profile</h4>
                                 </div>
                                 <div class="card-body">
-                                    <form action="update.php?id_user=<?php echo $data['id_user'];?> " method="post">
+                                    <form action="php/simpan_edittoko.php?id_konter=<?php echo $data['id_konter'];?>" method="post">
                                         <div class="row">
                                             <div class="col-md-5 pr-1">
                                                 <div class="form-group">
-                                                    <label>Status (disabled)</label>
-                                                    <input type="text" class="form-control" disabled="" placeholder="Status" value = "<?=$data['level'];?>">
+                                                    <label>Nama Konter</label>
+                                                    <input type="text" class="form-control" name="nama_konter" value = "<?=$data['nama_konter'];?>">
                                                 </div>
                                             </div>
-                                            <div class="col-md-3 px-1">
-                                                <div class="form-group">
-                                                    <label>Nama</label>
-                                                    <input type="text" class="form-control" name="nama" placeholder="Nama" value="<?=$data['nama'];?>">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 pl-1">
-                                                <div class="form-group">
-                                                    <label>No.Telpon</label>
-                                                    <input type="number" class="form-control" name="no_tlp" placeholder="No.Telpon" value="<?=$data['no_tlp'];?>">
+                                            <div class="col-md-2 pl-1 ">
+                                                <div class="form-line " >
+                                                <label>Layanan Antar Jemput</label>
+                                                    <select class="form-control pull-right" name="antar_jemput" required>
+                                                        <option value="" disabled selected>Silahkan Pilih</option>
+                                                        <option value="ya" <?=($data['antar_jemput']=='ya')?" checked ":"";?>>YA</option>
+                                                        <option value="tidak" <?=($data['antar_jemput']=='tidak')?" checked ":"";?>>TIDAK</option>
+                                                    </select>
                                                 </div>
                                             </div>                                            
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                <label for="exampleInputEmail1">Email</label>
-                                                    <input type="email" class="form-control" name="email" placeholder="email" value="<?=$data['email'];?>">
+                                                <label>Detail Konter</label>
+                                                    <input type="text" class="form-control" name="detail_konter" value = "<?=$data['detail_konter'];?>">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4 pr-1">
                                                 <div class="form-group">
-                                                    <label>Username</label>
-                                                    <input type="text" class="form-control" name="username" placeholder="Username" value="<?=$data['username'];?>">
+                                                    <label>Longtitude</label>
+                                                    <input type="number" class="form-control" name="longtitude" value = "<?=$data['longtitude'];?>">
                                                 </div>
                                             </div>
                                             <div class="col-md-4 px-1">
                                                 <div class="form-group">
-                                                    <label>Password</label>
-                                                    <input type="text" class="form-control" name="password" placeholder="Password" value="<?=$data['password'];?>">
+                                                    <label>Latitude</label>
+                                                    <input type="number" class="form-control" name="latitude" value = "<?=$data['latitude'];?>">
                                                 </div>
                                             </div>  
                                         </div>
-                                        <button type="submit" name="update" class="btn btn-info btn-fill pull-right">Update Profile</button>
+                                        <button type="submit" name="submit" class="btn btn-info btn-fill pull-right">Update</button>
+                                        <div class="btn btn-info">
+                                            <a class="" href="toko.php">Kembali</a>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="card card-user">
-                                <div class="card-image">
-                                    <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="...">
-                                </div>
-                                <div class="card-body">
-                                    <div class="author">
-                                        <a href="#">
-                                            <img class="avatar border-gray" src="assets/img/faces/face-3.jpg" alt="...">
-                                            <h5 class="title"><?php echo $data['nama']; ?></h5>
-                                        </a>
-                                        <p class="description">
-                                            <?php echo $data['username']; ?>
-                                        </p>
-                                    </div>
-                                    <p class="description text-center">
-                                        "Lamborghini Mercy
-                                        <br> Your chick she so thirsty
-                                        <br> I'm in that two seat Lambo"
-                                    </p>
-                                </div>
-                                <hr>
-                                <div class="button-container mr-auto ml-auto">
-                                    <button href="#" class="btn btn-simple btn-link btn-icon">
-                                        <i class="fa fa-facebook-square"></i>
-                                    </button>
-                                    <button href="#" class="btn btn-simple btn-link btn-icon">
-                                        <i class="fa fa-twitter"></i>
-                                    </button>
-                                    <button href="#" class="btn btn-simple btn-link btn-icon">
-                                        <i class="fa fa-google-plus-square"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

@@ -46,6 +46,9 @@
     width: 100%;
     height: 100%;
 }
+.raised-block {
+    padding-left: 0.625rem;
+}
 
 .fixed-plugin li>a,
 .fixed-plugin .badge {

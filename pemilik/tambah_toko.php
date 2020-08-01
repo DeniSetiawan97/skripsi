@@ -1,7 +1,7 @@
 <?php
 session_start();
 if($_SESSION['level']=="") {
-    header("Location: ../admin/table.php");
+    header("Location: ../login/login.php");
 }
 
 ?>
@@ -41,7 +41,7 @@ if($_SESSION['level']=="") {
 
 <body>
     <div class="wrapper">
-        <div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
+        <div class="sidebar" data-image="assets/img/sidebar-5.jpg">
             <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
@@ -67,9 +67,9 @@ if($_SESSION['level']=="") {
                         </a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="table.php">
+                        <a class="nav-link" href="toko.php">
                             <i class="nc-icon nc-notes"></i>
-                            <p>Table List</p>
+                            <p> Profil Toko</p>
                         </a>
                     </li>
                     <li>
@@ -156,59 +156,96 @@ if($_SESSION['level']=="") {
             </nav>
             <!-- End Navbar -->
 
-            <?php
-                 $id_user = $_SESSION['id_user'];
-
-                 $query = "SELECT * FROM konter_servis WHERE id_user = '$id_user'";
-                 $hasil = mysqli_query ($conn, $query);
-                 //mysqli_error($id_user);
-                 if (!$hasil) die ("Gagal query ...");
-                     
-                 $data = mysqli_fetch_array($hasil);
-                 //print_r($data);
-            ?>
-
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="card strpied-tabled-with-hover">
-                                <div class="card-header ">
-                                    <h4 class="card-title">Striped Table with Hover</h4>
-                                    <p class="card-category">Here is a subtitle for this table</p>
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Edit Profile</h4>
                                 </div>
-                                <div class="card-body table-full-width table-responsive">
-                                    <table class="table table-hover table-striped">
-                                        <thead>
-                                            <th>No</th>
-                                            <th>Nama</th>
-                                            <th>Username</th>
-                                            <th>No Telpon</th>
-                                            <th>Email</th>
-                                            <th>Level</th>
-                                            <th>Aksi</th>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                            <?php
-                                                $no = 0;
-                                                while($data = mysqli_fetch_array($hasil)) {
-                                                    $no++;
-                                                    echo "<td>$no</td>";
-                                                    echo "<td>".$data['nama']."</td>"
-                                                        ."<td>".$data['username']."</td>"
-                                                        ."<td>".$data['no_tlp']."</td>"
-                                                        ."<td>".$data['email']."</td>"
-                                                        ."<td>".$data['level']."</td>"
-                                                        ."<td>
-                                                            <a href='hapus.php?id_user=".$data['id_user']."'class='btn btn-danger btn-sm' onclick='return confirm(\'Yakin ingin menghapus data ini?\')'>Hapus</a>
-                                                        </td>";
-                                                    echo "</tr>";
-                                                }
-                                            ?>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="card-body">
+                                    <form action="php/simpan_toko.php" method="post">
+                                        <div class="row">
+                                            <div class="col-md-5 pr-1">
+                                                <div class="form-group">
+                                                    <label>Nama Konter</label>
+                                                    <input type="text" class="form-control" name="nama_konter" placeholder="Nama Konter">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 pl-1">
+                                                <div class="form-line">
+                                                <label>Layanan Antar Jemput</label>
+                                                    <select class="form-control" name="antar_jemput" required>
+                                                        <option value="" disabled selected>Silahkan Pilih</option>
+                                                        <option value="ya">YA</option>
+                                                        <option value="tidak">TIDAK</option>
+                                                    </select>
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                <label>Detail Konter</label>
+                                                    <input type="text" class="form-control" name="detail_konter" placeholder="Detail Konter">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 pr-1">
+                                                <div class="form-group">
+                                                    <label>Longtitude</label>
+                                                    <input type="number" class="form-control" name="longtitude" placeholder="Longtitude">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 px-1">
+                                                <div class="form-group">
+                                                    <label>Latitude</label>
+                                                    <input type="number" class="form-control" name="latitude" placeholder="Latitude">
+                                                </div>
+                                            </div>  
+                                        </div>
+                                        <button type="submit" name="submit" class="btn btn-info btn-fill pull-right">Tambah Toko</button>
+                                        <div class="btn btn-info">
+                                            <a class="" href="toko.php">Kembali</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card card-user">
+                                <div class="card-image">
+                                    <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="...">
+                                </div>
+                                <div class="card-body">
+                                    <div class="author">
+                                        <a href="#">
+                                            <img class="avatar border-gray" src="../assets/img/faces/face-3.jpg" alt="...">
+                                            <h5 class="title"><?php echo $data['nama']; ?></h5>
+                                        </a>
+                                        <p class="description">
+                                            <?php echo $data['username']; ?>
+                                        </p>
+                                    </div>
+                                    <p class="description text-center">
+                                        "Lamborghini Mercy
+                                        <br> Your chick she so thirsty
+                                        <br> I'm in that two seat Lambo"
+                                    </p>
+                                </div>
+                                <hr>
+                                <div class="button-container mr-auto ml-auto">
+                                    <button href="#" class="btn btn-simple btn-link btn-icon">
+                                        <i class="fa fa-facebook-square"></i>
+                                    </button>
+                                    <button href="#" class="btn btn-simple btn-link btn-icon">
+                                        <i class="fa fa-twitter"></i>
+                                    </button>
+                                    <button href="#" class="btn btn-simple btn-link btn-icon">
+                                        <i class="fa fa-google-plus-square"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
