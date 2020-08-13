@@ -173,15 +173,17 @@ if($_SESSION['level']=="") {
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-10">
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">Edit Profile</h4>
                                 </div>
                                 <div class="card-body">
-                                    <form action="php/simpan_edittoko.php?id_konter=<?php echo $data['id_konter'];?>" method="post">
+                                    <!--<form action="php/simpan_edittoko.php?id_konter=<?php echo $data['id_konter'];?>" method="post">-->
+                                    <form action="php/simpan_edittoko.php?id_konter=<?php echo $data['id_konter'];?>" method="POST">
                                         <div class="row">
-                                            <div class="col-md-5 pr-1">
+                                        <input type="hidden" name="id" value="<?php echo $id; ?>">
+                                            <div class="col-md-3 pr-1">
                                                 <div class="form-group">
                                                     <label>Nama Konter</label>
                                                     <input type="text" class="form-control" name="nama_konter" value = "<?=$data['nama_konter'];?>">
@@ -207,20 +209,20 @@ if($_SESSION['level']=="") {
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-4 pr-1">
+                                            <div class="col-md-3 pr-1">
                                                 <div class="form-group">
                                                     <label>Longtitude</label>
                                                     <input type="number" class="form-control" name="longtitude" value = "<?=$data['longtitude'];?>">
                                                 </div>
                                             </div>
-                                            <div class="col-md-4 px-1">
+                                            <div class="col-md-3 px-1">
                                                 <div class="form-group">
                                                     <label>Latitude</label>
                                                     <input type="number" class="form-control" name="latitude" value = "<?=$data['latitude'];?>">
                                                 </div>
                                             </div>  
                                         </div>
-                                        <button type="submit" name="submit" class="btn btn-info btn-fill pull-right">Update</button>
+                                        <button type="submit" name="update" class="btn btn-info btn-fill pull-right">Update</button>
                                         <div class="btn btn-info">
                                             <a class="" href="toko.php">Kembali</a>
                                         </div>
