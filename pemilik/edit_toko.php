@@ -179,26 +179,24 @@ if($_SESSION['level']=="") {
                                     <h4 class="card-title">Edit Profile</h4>
                                 </div>
                                 <div class="card-body">
-                                    <!--<form action="php/simpan_edittoko.php?id_konter=<?php echo $data['id_konter'];?>" method="post">-->
+                                    
                                     <form action="php/simpan_edittoko.php?id_konter=<?php echo $data['id_konter'];?>" method="POST">
                                         <div class="row">
-                                        <input type="hidden" name="id" value="<?php echo $id; ?>">
                                             <div class="col-md-3 pr-1">
                                                 <div class="form-group">
                                                     <label>Nama Konter</label>
                                                     <input type="text" class="form-control" name="nama_konter" value = "<?=$data['nama_konter'];?>">
                                                 </div>
-                                            </div>
-                                            <div class="col-md-2 pl-1 ">
-                                                <div class="form-line " >
-                                                <label>Layanan Antar Jemput</label>
-                                                    <select class="form-control pull-right" name="antar_jemput" required>
-                                                        <option value="" disabled selected>Silahkan Pilih</option>
-                                                        <option value="ya" <?=($data['antar_jemput']=='ya')?" checked ":"";?>>YA</option>
-                                                        <option value="tidak" <?=($data['antar_jemput']=='tidak')?" checked ":"";?>>TIDAK</option>
-                                                    </select>
+                                            </div> 
+                                                <div class="form-line col-md-3 pr-1" >
+                                                    <label>Layanan Antar Jemput</label>
+                                                        <select class="form-control pull-right" name="antar_jemput" required>
+                                                            <option value="" disabled selected>Silahkan Pilih</option>
+                                                            <option value="ya" <?=($data['antar_jemput']=='ya')?" checked ":"";?>>YA</option>
+                                                            <option value="tidak" <?=($data['antar_jemput']=='tidak')?" checked ":"";?>>TIDAK</option>
+                                                        </select>
                                                 </div>
-                                            </div>                                            
+                                                                                       
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12">

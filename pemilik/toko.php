@@ -174,10 +174,8 @@ if($_SESSION['level']=="") {
                             <div class="card strpied-tabled-with-hover">
                                 <div class="card-header ">
                                     <h4 class="card-title">Daftar User</h4>
-                                    <p class="card-category">Daftar Pemilik Dan Pengunjung Teregistrasi</p>
-                                    <a class="nav-link" href="tambah_toko.php">
-                                        <button type="submit" name="add" class="btn btn-info btn-sm btn-fill pull-right" margin>Tamabah Toko</button>
-                                    </a>
+                                    <p class="card-category">Daftar Pemilik Dan Pengunjung Teregistrasi</p>                                    
+                                    <a href="tambah_toko.php" name="add" class="btn btn-info btn-sm btn-fill pull-right">Tamabah Toko</a>
                                 </div>
                                 <div class="card-body table-full-width table-responsive">
                                 
