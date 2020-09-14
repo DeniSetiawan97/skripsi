@@ -8,8 +8,9 @@
     $nama_konter    = $_POST['nama_konter'];
     $antar_jemput	= $_POST['antar_jemput'];
     $detail_konter	= $_POST['detail_konter'];
-    $longtitude		= $_POST['longtitude'];
     $latitude		= $_POST['latitude']; 
+    $longitude		= $_POST['longitude'];
+    
 
   
         if (isset($_POST['update'])){
@@ -17,8 +18,8 @@
               nama_konter		= '$_POST[nama_konter]',
               antar_jemput	= '$_POST[antar_jemput]',
               detail_konter		= '$_POST[detail_konter]',
-              longtitude	= '$_POST[longtitude]',
-              latitude	= '$_POST[latitude]'
+              latitude	= '$_POST[latitude]',
+              longitude	= '$_POST[longitude]'              
               where id_konter = '$id'") or die(mysqli_error);
               echo "<script>alert('Berhasil Update !!!');document.location.href='../toko.php'</script>/n";                                   
               

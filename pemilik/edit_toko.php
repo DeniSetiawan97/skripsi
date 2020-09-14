@@ -188,35 +188,37 @@ if($_SESSION['level']=="") {
                                                     <input type="text" class="form-control" name="nama_konter" value = "<?=$data['nama_konter'];?>">
                                                 </div>
                                             </div> 
-                                                <div class="form-line col-md-3 pr-1" >
-                                                    <label>Layanan Antar Jemput</label>
-                                                        <select class="form-control pull-right" name="antar_jemput" required>
-                                                            <option value="" disabled selected>Silahkan Pilih</option>
-                                                            <option value="ya" <?=($data['antar_jemput']=='ya')?" checked ":"";?>>YA</option>
-                                                            <option value="tidak" <?=($data['antar_jemput']=='tidak')?" checked ":"";?>>TIDAK</option>
-                                                        </select>
-                                                </div>
+                                            <div class="form-line col-md-3 pr-1" >
+                                                <label>Layanan Antar Jemput</label>
+                                                    <select class="form-control pull-right" name="antar_jemput" required>
+                                                        <option value="" disabled selected>Silahkan Pilih</option>
+                                                        <option value="ya" <?=($data['antar_jemput']=='ya')?" checked ":"";?>>YA</option>
+                                                        <option value="tidak" <?=($data['antar_jemput']=='tidak')?" checked ":"";?>>TIDAK</option>
+                                                    </select>
+                                            </div>
                                                                                        
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                <label>Detail Konter</label>
-                                                    <input type="text" class="form-control" name="detail_konter" value = "<?=$data['detail_konter'];?>">
+                                                <label class="control-label col-sm-2">Detail Konter</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="detail_konter" value = "<?=$data['detail_konter'];?>">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-3 pr-1">
                                                 <div class="form-group">
-                                                    <label>Longtitude</label>
-                                                    <input type="number" class="form-control" name="longtitude" value = "<?=$data['longtitude'];?>">
+                                                    <label>Latitude</label>
+                                                    <input type="text" class="form-control" name="latitude" value = "<?=$data['latitude'];?>">
                                                 </div>
                                             </div>
                                             <div class="col-md-3 px-1">
                                                 <div class="form-group">
-                                                    <label>Latitude</label>
-                                                    <input type="number" class="form-control" name="latitude" value = "<?=$data['latitude'];?>">
+                                                    <label>Longitude</label>
+                                                    <input type="text" class="form-control" name="longitude" value = "<?=$data['longitude'];?>">
                                                 </div>
                                             </div>  
                                         </div>

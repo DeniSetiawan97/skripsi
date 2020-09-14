@@ -185,8 +185,8 @@ if($_SESSION['level']=="") {
                                             <th>Nama Konter</th>
                                             <th>Detail Konter</th>
                                             <th>Antar Jemput</th>
-                                            <th>Longtitude</th>
                                             <th>Latitude</th>
+                                            <th>Longitude</th>
                                             <th>Aksi</th>
                                         </thead>
                                         <tbody>
@@ -199,8 +199,8 @@ if($_SESSION['level']=="") {
                                                     echo "<td>".$data['nama_konter']."</td>"
                                                         ."<td>".$data['detail_konter']."</td>"
                                                         ."<td>".$data['antar_jemput']."</td>"
-                                                        ."<td>".$data['longtitude']."</td>"
                                                         ."<td>".$data['latitude']."</td>"
+                                                        ."<td>".$data['longitude']."</td>"
                                                         ."<td>                                                            
                                                             <a href='edit_toko.php?id_konter=".$data['id_konter']."' class='btn btn-primary btn-fill btn-sm'>Edit</a>
                                                             <a href='php/hapus_toko.php?id_konter=".$data['id_konter']."' class='btn btn-danger btn-fill btn-sm'>Hapus</a>

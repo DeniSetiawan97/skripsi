@@ -195,14 +195,14 @@ if($_SESSION['level']=="") {
                                         <div class="row">
                                             <div class="col-md-4 pr-1">
                                                 <div class="form-group">
-                                                    <label>Longtitude</label>
-                                                    <input type="number" class="form-control" name="longtitude" placeholder="Longtitude">
+                                                    <label>Latitude</label>
+                                                        <input type="text" class="form-control" name="latitude" placeholder="Latitude">
                                                 </div>
                                             </div>
                                             <div class="col-md-4 px-1">
                                                 <div class="form-group">
-                                                    <label>Latitude</label>
-                                                    <input type="number" class="form-control" name="latitude" placeholder="Latitude">
+                                                    <label>Longitude</label>
+                                                        <input type="text" class="form-control" name="longitude" placeholder="longitude">
                                                 </div>
                                             </div>  
                                         </div>
