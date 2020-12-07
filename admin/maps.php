@@ -34,12 +34,12 @@
 
             include "../koneksi.php";
 
-            $query = mysqli_query($conn,"SELECT * FROM konter");
+            $query = mysqli_query($conn,"SELECT * FROM konter_servis");
             while ($row = $query->fetch_assoc()) {
                 $nama = $row["nama_konter"];
                 $lat  = $row["latitude"];
                 $long = $row["longitude"];
-                echo "addMarker($lat, $long, '$nama');\n";
+                echo "addMarker($lat, $long, '$nama');";
             }
                 
             ?> 
@@ -50,7 +50,7 @@
                 var marker = new google.maps.Marker({
                     map: peta,
                     position: lokasi
-                });       
+                });     
                 peta.fitBounds(bounds);
                 bindInfoWindow(marker, peta, infoWindow, info);
             }

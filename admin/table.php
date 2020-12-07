@@ -199,7 +199,7 @@ if($_SESSION['level']=="") {
                                                         ."<td>".$data['email']."</td>"
                                                         ."<td>".$data['level']."</td>"
                                                         ."<td>
-                                                            <a href='hapus.php?id_user=".$data['id_user']."' class='btn btn-danger btn-sm'>Hapus</a>
+                                                            <a href='hapus.php?id_user=".$data['id_user']."' class='btn btn-xs btn-danger'>Hapus</a>
                                                         </td>";
                                                     echo "</tr>";
                                                 }

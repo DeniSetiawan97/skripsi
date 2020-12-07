@@ -10,10 +10,10 @@
     <!-- Favicon-->
     <link rel="icon" href="favicon.ico" type="../image/x-icon">
     <!-- Custom Css -->
-    <link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/css/main.css">
-    <link rel="stylesheet" href="../assets/css/authentication.css">
-    <link rel="stylesheet" href="../assets/css/color_skins.css">
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/authentication.css">
+    <link rel="stylesheet" href="assets/css/color_skins.css">
 </head>
 
 <body class="theme-orange">
@@ -23,7 +23,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="header slideDown">
-                        <div class="logo"><img src="../assets/images/logo.png" alt="Nexa"></div>
+                        <div class="logo"><img src="assets/images/logo.png" alt="Nexa"></div>
                         <h1>Noob Programmer</h1>
                         <ul class="list-unstyled l-social">
                             <li><a href="#"><i class="zmdi zmdi-facebook-box"></i></a></li>
@@ -87,8 +87,8 @@
 </div>
 
 <!-- Jquery Core Js -->
-<script src="../assets/bundles/libscripts.bundle.js"></script>    
-<script src="../assets/bundles/vendorscripts.bundle.js"></script>
-<script src="../assets/bundles/mainscripts.bundle.js"></script>
+<script src="assets/bundles/libscripts.bundle.js"></script>    
+<script src="assets/bundles/vendorscripts.bundle.js"></script>
+<script src="assets/bundles/mainscripts.bundle.js"></script>
 </body>
 </html>

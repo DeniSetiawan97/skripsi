@@ -45,9 +45,10 @@ if($_SESSION['level']=="") {
             $query = mysqli_query($conn,"SELECT * FROM konter_servis WHERE id_user='$id_user'");
             while ($row = $query->fetch_assoc()) {
                 $nama = $row["nama_konter"];
+                $det  = $row["detail_konter"];
                 $lat  = $row["latitude"];
                 $long = $row["longitude"];
-                echo "addMarker($lat, $long, '$nama');\n";
+                echo "addMarker($lat, $long, '$nama');";
             }
                 
             ?> 

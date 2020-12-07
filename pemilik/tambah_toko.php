@@ -207,47 +207,15 @@ if($_SESSION['level']=="") {
                                             </div>  
                                         </div>
                                         <button type="submit" name="submit" class="btn btn-info btn-fill pull-right">Tambah Toko</button>
-                                        <div class="btn btn-info">
-                                            <a class="" href="toko.php">Kembali</a>
-                                        </div>
+                                        
+                                            <a class="btn btn-danger" href="toko.php">Kembali</a><span class="glyphicon glyphicon-arrow-left"></span>
+                                        
                                     </form>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="card card-user">
-                                <div class="card-image">
-                                    <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="...">
-                                </div>
-                                <div class="card-body">
-                                    <div class="author">
-                                        <a href="#">
-                                            <img class="avatar border-gray" src="../assets/img/faces/face-3.jpg" alt="...">
-                                            <h5 class="title"><?php echo $data['nama']; ?></h5>
-                                        </a>
-                                        <p class="description">
-                                            <?php echo $data['username']; ?>
-                                        </p>
-                                    </div>
-                                    <p class="description text-center">
-                                        "Lamborghini Mercy
-                                        <br> Your chick she so thirsty
-                                        <br> I'm in that two seat Lambo"
-                                    </p>
-                                </div>
-                                <hr>
-                                <div class="button-container mr-auto ml-auto">
-                                    <button href="#" class="btn btn-simple btn-link btn-icon">
-                                        <i class="fa fa-facebook-square"></i>
-                                    </button>
-                                    <button href="#" class="btn btn-simple btn-link btn-icon">
-                                        <i class="fa fa-twitter"></i>
-                                    </button>
-                                    <button href="#" class="btn btn-simple btn-link btn-icon">
-                                        <i class="fa fa-google-plus-square"></i>
-                                    </button>
-                                </div>
-                            </div>
+                            <div id="map" style="height: 400px;"></div>
                         </div>
                     </div>
                 </div>
@@ -385,5 +353,44 @@ if($_SESSION['level']=="") {
 <script src="assets/js/light-bootstrap-dashboard.js?v=2.0.0 " type="text/javascript"></script>
 <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
 <script src="assets/js/demo.js"></script>
+<script>
+var defaultCenter = {
+    lat : <?=get_option('default_lat')?>, 
+    lng : <?=get_option('default_lng')?>
+};
+function initMap() {
+
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: <?=get_option('default_zoom')?>,
+    center: defaultCenter 
+  });
+
+  var marker = new google.maps.Marker({
+    position: defaultCenter,
+    map: map,
+    title: 'Click to zoom',
+    draggable:true
+  });
+  
+  
+    marker.addListener('drag', handleEvent);
+    marker.addListener('dragend', handleEvent);
+    
+    var infowindow = new google.maps.InfoWindow({
+        content: '<h4>Drag untuk pindah lokasi</h4>'
+    });
+    
+    infowindow.open(map, marker);
+}
+
+function handleEvent(event) {
+    document.getElementById('lat').value = event.latLng.lat();
+    document.getElementById('lng').value = event.latLng.lng();
+}
+
+$(function(){
+    initMap();
+})
+</script>
 
 </html>
