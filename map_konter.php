@@ -27,6 +27,8 @@
             menubar : false,
             toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
         });
+    </script>   
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2t66MDpj3mi7QnqPODUOb25VtT6VnOaA&region=ID"></script>
     <script src="assets/js/script.js"></script>
   </head>
   <body>
@@ -39,67 +41,76 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.php">GIS</a>
+          <a class="navbar-brand" href="?">GIS</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            
-            <li><a href="map_konter.php"><span class="glyphicon glyphicon-map-marker"></span>Persebaran Konter</a></li>
+            <li><a href="map_konter.php"><span class="glyphicon glyphicon-map-marker"></span> Persebaran Konter</a></li>
             <li><a href="tempat_list.php"><span class="glyphicon glyphicon-list-alt"></span> Daftar Konter</a></li>            
-            <li><a href="login/login.php"><span class="glyphicon glyphicon-user"></span> Login</a></li>
-                           
+            <li><a href="login/login.php"><span class="glyphicon glyphicon-user"></span> Login</a></li>                  
           </ul>          
         </div>
       </div>
     </nav>
-    <div class="container">
-        <div class="page-header">
-            <h1>Tempat</h1>
-        </div>
-        <div class="panel panel-default">        
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped">
-                    <thead>
-                        <tr class="nw">
-                            <th>No</th>
-                            <th>Nama Konter</th>
-                            <th>Layanan Antar Jemput</th>
-                            <th>Detail Konter</th>
-                            <th>Aksi</th>                
-                        </tr>
-                    </thead>
-                    <?php
-                        include "koneksi.php";
-                            
-                        $query = "SELECT * FROM konter_servis";
-                        $hasil	= mysqli_query($conn, $query);
-                        if (!$hasil){
-                            die("Gagal AMbil Data...");
-                        }
-                    ?>
+    
+    
 
-                    <tr>
-                        <?php
-                            $no = 0;
-                            while($data = mysqli_fetch_array($hasil)) {
-                            $no++;
-                            echo "<td>$no</td>";
-                            echo "<td>".$data['nama_konter']."</td>"
-                                ."<td>".$data['antar_jemput']."</td>"
-                                ."<td>".$data['detail_konter']."</td>"
-                                ."<td>
-                                    <a href='detail_konter.php' class='btn btn-success'>Lihat detail</a>
-                                </td>";
-                            echo "</tr>";
-                            }
-                        ?>
-                    </tr>
-                </table>
-            </div>
-        </div>
+    <div class="container">
+    <?php
+        include("koneksi.php");
+    ?>
+
+    <div class="page-header">
+        <h1>Persebaran Konter</h1>
     </div>
 
-    
+    <div id="dvMap" style="height: 500px;"></div>
+    <script type="text/javascript">
+        var markers = [
+        <?php
+            $sql = mysqli_query($conn, "SELECT * FROM konter_servis");
+            while(($data =  mysqli_fetch_assoc($sql))) {
+        ?>
+        {
+            "latitude": '<?php echo $data['latitude']; ?>',
+            "longitude": '<?php echo $data['longitude']; ?>',
+            "nama_konter": '<?php echo $data['nama_konter']; ?>'
+        },
+        <?php
+        }
+        ?>
+        ];
+    </script>
+    <script type="text/javascript">
+        window.onload = function () {
+            var mapOptions = {
+                center: new google.maps.LatLng(-7.7955798,110.3694896),
+                zoom: 13,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }; 
+            var infoWindow = new google.maps.InfoWindow();
+            var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+            for (i = 0; i < markers.length; i++) {
+                var data = markers[i];
+                var latnya = data.latitude;
+                var longnya = data.longitude;
+                
+                var myLatlng = new google.maps.LatLng(latnya, longnya);
+                var marker = new google.maps.Marker({
+                    position: myLatlng,
+                    map: map,
+                    title: data.nama_konter
+                });
+                    (function (marker, data) {
+                        google.maps.event.addListener(marker, "click", function (e) {
+                            infoWindow.setContent('<h5>Nama Konter</b> :'+ data.nama_konter +'</h5>'+'<p align="center"><a href="https://google.com" class="link_detail btn btn-primary">Lihat Detail');
+                            infoWindow.open(map, marker);
+                        });
+                    })(marker, data);
+            }
+        }
+    </script>
+    </div>
     <footer class="footer bg-primary">
       <div class="container">
         <p>Copyright &copy; <?=date('Y')?> Deni Setiawan <em class="pull-right">7 Desember 2020</em></p>

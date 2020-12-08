@@ -44,7 +44,7 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             
-            <li><a href=".php"><span class="glyphicon glyphicon-map-marker"></span> Tempat</a></li>
+            <li><a href="map_konter.php"><span class="glyphicon glyphicon-map-marker"></span> Persebaran Konter</a></li>
             <li><a href="tempat_list.php"><span class="glyphicon glyphicon-list-alt"></span> Daftar Konter</a></li>            
             <li><a href="login/login.php"><span class="glyphicon glyphicon-user"></span> Login</a></li>
                            
@@ -61,7 +61,7 @@
     
     <footer class="footer bg-primary">
       <div class="container">
-        <p>Copyright &copy; <?=date('Y')?> SarjanaKomedi.com <em class="pull-right">13 Oktober 2017</em></p>
+        <p>Copyright &copy; <?=date('Y')?> Deni Setiawan <em class="pull-right">7 Desember 2020</em></p>  
       </div>
     </footer>
 </body>

@@ -50,7 +50,7 @@
                 var marker = new google.maps.Marker({
                     map: peta,
                     position: lokasi
-                });     
+                });       
                 peta.fitBounds(bounds);
                 bindInfoWindow(marker, peta, infoWindow, info);
             }

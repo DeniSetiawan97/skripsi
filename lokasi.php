@@ -1,18 +1,18 @@
 <?php
 include("koneksi.php");
 ?>
-  <div id="dvMap" style="width: 1000px; height: 550px"></div>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2t66MDpj3mi7QnqPODUOb25VtT6VnOaA&libraries=drawing" async defer></script>
+<div id="dvMap" style="width: 1000px; height: 550px"></div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2t66MDpj3mi7QnqPODUOb25VtT6VnOaA&callback=initialize" async defer></script>
   <script type="text/javascript">
     var markers = [
     <?php
-    $sql = mysqli_query($db, "SELECT * FROM lokasi");
+    $sql = mysqli_query($db, "SELECT * FROM konter_servis");
     while(($data =  mysqli_fetch_assoc($sql))) {
     ?>
     {
-         "lat": '<?php echo $data['latitude']; ?>',
-         "long": '<?php echo $data['longitude']; ?>',
-         "keterangan": '<?php echo $data['keterangan']; ?>'
+         "latitude": '<?php echo $data['latitude']; ?>',
+         "longitude": '<?php echo $data['longitude']; ?>',
+         "nama_konter": '<?php echo $data['nama_konter']; ?>'
     },
     <?php
     }
@@ -21,36 +21,27 @@ include("koneksi.php");
     </script>
     <script type="text/javascript">
         window.onload = function () {
-      
             var mapOptions = {
-            center: new google.maps.LatLng(-2.2459632,116.2409634),
-                zoom: 5,
+                center: new google.maps.LatLng(-7.7955798,110.3694896),
+                zoom: 13,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             }; 
             var infoWindow = new google.maps.InfoWindow();
             var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
-      var drawingManager = new google.maps.drawing.DrawingManager({
-                    drawingControl: true,
-                    drawingControlOptions: {
-                        position: google.maps.ControlPosition.TOP_CENTER,
-                        drawingModes: [google.maps.drawing.OverlayType.MARKER]
-                    }
-                });
-      drawingManager.setMap(map);
-      
             for (i = 0; i < markers.length; i++) {
                 var data = markers[i];
-        var latnya = data.lat;
-        var longnya = data.long;
+        var latnya = data.latitude;
+        var longnya = data.longitude;
+        
         var myLatlng = new google.maps.LatLng(latnya, longnya);
                 var marker = new google.maps.Marker({
                     position: myLatlng,
                     map: map,
-                    title: data.keterangan
+                    title: data.nama_konter
                 });
                 (function (marker, data) {
                     google.maps.event.addListener(marker, "click", function (e) {
-                        infoWindow.setContent('<b>Keterangan</b> :' + data.keterangan + '<br>');
+                        infoWindow.setContent('<b>Lokasi</b> :' + data.nama_konter + '<p><a href="https://google.com">Lihat Detail');
                         infoWindow.open(map, marker);
                     });
                 })(marker, data);
