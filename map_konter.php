@@ -74,7 +74,8 @@
         {
             "latitude": '<?php echo $data['latitude']; ?>',
             "longitude": '<?php echo $data['longitude']; ?>',
-            "nama_konter": '<?php echo $data['nama_konter']; ?>'
+            "nama_konter": '<?php echo $data['nama_konter']; ?>',
+            "id_konter": '<?php echo $data['id_konter']; ?>'
         },
         <?php
         }
@@ -103,7 +104,7 @@
                 });
                     (function (marker, data) {
                         google.maps.event.addListener(marker, "click", function (e) {
-                            infoWindow.setContent('<h5>Nama Konter</b> :'+ data.nama_konter +'</h5>'+'<p align="center"><a href="https://google.com" class="link_detail btn btn-primary">Lihat Detail');
+                            infoWindow.setContent('<h5>Nama Konter</b> :'+ data.nama_konter +'</h5>'+'<p align="center"><a href="detail_konter.php?id_konter='+data.id_konter+'" class="link_detail btn btn-primary">Lihat Detail');
                             infoWindow.open(map, marker);
                         });
                     })(marker, data);
