@@ -88,7 +88,7 @@
                                 ."<td>".$data['antar_jemput']."</td>"
                                 ."<td>".$data['detail_konter']."</td>"
                                 ."<td>
-                                    <a href='detail_konter.php' class='btn btn-success'>Lihat detail</a>
+                                  <a href='detail_konter.php?id_konter=".$data['id_konter']."' class='btn btn-success'>Lihat detail</a>
                                 </td>";
                             echo "</tr>";
                             }

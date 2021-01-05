@@ -165,7 +165,7 @@ if($_SESSION['level']=="") {
                                     <h4 class="card-title">Edit Profile</h4>
                                 </div>
                                 <div class="card-body">
-                                    <form action="php/simpan_toko.php" method="post">
+                                    <form action="php/simpan_toko.php" method="post" enctype="multipart/form-data">
                                         <div class="row">
                                             <div class="col-md-5 pr-1">
                                                 <div class="form-group">
@@ -187,8 +187,8 @@ if($_SESSION['level']=="") {
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                <label>Detail Konter</label>
-                                                    <input type="text" class="form-control" name="detail_konter" placeholder="Detail Konter">
+                                                <h4>Detail Konter</h4>
+                                                    <textarea style="resize:none;width:420px;height:100px;" name="detail_konter" placeholder="Detail Konter"></textarea>
                                                 </div>
                                             </div>
                                         </div>
