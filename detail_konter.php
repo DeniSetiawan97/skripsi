@@ -32,20 +32,24 @@
     <script type="text/javascript">
         var markers = [
           <?php
-          include "koneksi.php";
-          $id_konter = $_GET['id_konter'];
-              $sql = mysqli_query($conn, "SELECT * FROM konter_servis WHERE id_konter='$id_konter'");
-              while(($data =  mysqli_fetch_assoc($sql))) {
-          ?>
-        {
-            "latitude": '<?php echo $data['latitude']; ?>',
-            "longitude": '<?php echo $data['longitude']; ?>',
-            "nama_konter": '<?php echo $data['nama_konter']; ?>',
-            "id_konter": '<?php echo $data['id_konter']; ?>'
-        },
-        <?php
-        }
-        ?>
+                include "koneksi.php";
+                $id_konter = $_GET['id_konter'];
+
+                $query = "SELECT * FROM konter_servis WHERE id_konter='$id_konter'";
+                $hasil = mysqli_query ($conn, $query);
+                //mysqli_error($id_user);
+                if (!$hasil) die ("Gagal query ...");
+                    
+                $data = mysqli_fetch_array($hasil);
+                //print_r($data);
+                
+            ?>
+            {
+                "latitude": '<?php echo $data['latitude']; ?>',
+                "longitude": '<?php echo $data['longitude']; ?>',
+                "nama_konter": '<?php echo $data['nama_konter']; ?>',
+                "id_konter": '<?php echo $data['id_konter']; ?>'
+            }
         ];
     </script>
   </head>
@@ -74,7 +78,7 @@
     </nav>
     <div class="container">
         <div class="page-header">
-            <h1><?=$data['nama_konter'];?></h1>
+            <h1><?=$data["nama_konter"];?></h1>
         </div>
         <div class="row">
             <div class="col-md-6">
