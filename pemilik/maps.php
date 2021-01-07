@@ -191,7 +191,7 @@ if($_SESSION['level']=="") {
             </nav>
             <!-- End Navbar -->
             <div class="map-container">
-                <div id="googleMap" style="width:1100px;height:500px;"></div>
+                <div id="googleMap" style="width:100%;height:100%;"></div>
             </div>
             <footer class="footer">
                 <div class="container-fluid">

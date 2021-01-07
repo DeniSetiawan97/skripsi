@@ -1,218 +1,134 @@
-<?php
-    include "koneksi.php";
-    $id_konter = $_GET['id_konter'];
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>    
+    <meta name="description" content="Source Code Sistem Informasi Geografis / Geographic Information System (GIS) berbasis web dengan PHP dan MySQL. Studi kasus: lokasi pura di Bali."/>
+    <meta name="keywords" content="Sistem, Informasi, geografis, gis, Tugas Akhir, Skripsi, Jurnal, Source Code, PHP, MySQL, CSS, JavaScript, Bootstrap, jQuery"/>
+    <meta name="author" content="sarjanakomedi.com"/>
+    <link rel="icon" href="favicon.ico"/>
+    <link rel="canonical" href="https://sarjanakomedi.com/" />
 
-    $query = "SELECT * FROM konter_servis WHERE id_konter='$id_konter'";
-    $hasil = mysqli_query ($conn, $query);
-    //mysqli_error($id_user);
-    if (!$hasil) die ("Gagal query ...");
-                    
-    $data = mysqli_fetch_array($hasil);
-    //print_r($data);
-                
-?>
-<div class="page-header">
-    <h1><?=$data['nama_konter'];?></h1>
-</div>
-<div class="row">
-    <div class="col-md-6">
-        <p>Lokasi: <?=$data['detail_konter'];?></p>
-        <div>
-        <?=$row->keterangan?>
+    <title>Sistem Informasi Geografis</title>
+    <link href="assets/css/solar-bootstrap.min.css" rel="stylesheet"/>
+    <link href="assets/css/general.css" rel="stylesheet"/>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>  
+    <script src="assets/tinymce/tinymce.min.js"></script> 
+    <script>
+        tinymce.init({
+        selector: "textarea.mce",
+            plugins: [
+                "advlist autolink lists link image charmap print preview anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime media table contextmenu paste"
+            ],
+            menubar : false,
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+        });
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2t66MDpj3mi7QnqPODUOb25VtT6VnOaA&callback=initialize" async defer></script>
+    <script type="text/javascript">
+        var markers = [
+          <?php
+          include "koneksi.php";
+          $id_konter = $_GET['id_konter'];
+              $sql = mysqli_query($conn, "SELECT * FROM konter_servis WHERE id_konter='$id_konter'");
+              while(($data =  mysqli_fetch_assoc($sql))) {
+          ?>
+        {
+            "latitude": '<?php echo $data['latitude']; ?>',
+            "longitude": '<?php echo $data['longitude']; ?>',
+            "nama_konter": '<?php echo $data['nama_konter']; ?>',
+            "id_konter": '<?php echo $data['id_konter']; ?>'
+        },
+        <?php
+        }
+        ?>
+        ];
+    </script>
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.php">GIS</a>
         </div>
-    </div>
-    <div class="col-md-6">
-        <p>
-            <a href="?m=tempat_list" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-chevron-left"></span> Lihat semua tempat</a>
-            <a href="javascript:void(0)" onclick="showRoute()" class="btn btn-info btn-sm"> <span class="glyphicon glyphicon-search"></span> Tampilkan Rute </a>
-            <a href="?m=detail&ID=<?=$_GET['ID']?>" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-list"></span> Rute Detail</a>
-        </p>
-        <div id="map" style="height: 500px;"></div>
-        <h3>Galeri</h3>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            
+            <li><a href="map_konter.php"><span class="glyphicon glyphicon-map-marker"></span>Persebaran Konter</a></li>
+            <li><a href="tempat_list.php"><span class="glyphicon glyphicon-list-alt"></span> Daftar Konter</a></li>            
+            <li><a href="login/login.php"><span class="glyphicon glyphicon-user"></span> Login</a></li>
+                           
+          </ul>          
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+        <div class="page-header">
+            <h1><?=$data['nama_konter'];?></h1>
+        </div>
         <div class="row">
-            <?php
-            $rows = $db->get_results("SELECT * FROM tb_galeri WHERE id_tempat='$_GET[ID]'");
-            foreach($rows as $r):?>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal"data-title="<?=$r->nama_galeri?>" data-caption="<?=strip_tags($r->ket_galeri)?>" data-image="assets/images/galeri/<?=$r->gambar?>" data-target="#image-gallery">
-                    <img src="assets/images/galeri/small_<?=$r->gambar?>" title="<?=$r->nama_galeri?>" />
-                </a> 
+            <div class="col-md-6">
+                    <p>Detail: <?=$data['detail_konter'];?></p>
+                <div>
+                    <p>Fitur Antar Jemput: <?=$data['antar_jemput'];?></p>
+                </div>
             </div>
-        <?php endforeach?>
+                <div class="col-md-6">
+                    <p>
+                        <a href="tempat_list.php" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-chevron-left"></span> Lihat semua tempat</a>
+                        <a href="javascript:void(0)" onclick="showRoute()" class="btn btn-info btn-sm"> <span class="glyphicon glyphicon-search"></span> Tampilkan Rute </a>
+                        <a href="?m=detail&ID=<?=$_GET['ID']?>" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-list"></span> Rute Detail</a>
+                    </p>
+                    <div id="dvMap" style="height: 500px;"></div>
+                        
+                </div>
         </div>
     </div>
-</div>
 
-<div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">x</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="image-gallery-title"></h4>
-            </div>
-            <div class="modal-body">
-                <img id="image-gallery-image" class="img-responsive" src="">
-            </div>
-            <div class="modal-footer">
-
-                <div class="col-md-2">
-                    <button type="button" class="btn btn-primary" id="show-previous-image">Previous</button>
-                </div>
-
-                <div class="col-md-8 text-justify" id="image-gallery-caption">
-                    This text will be overwritten by jQuery
-                </div>
-
-                <div class="col-md-2">
-                    <button type="button" id="show-next-image" class="btn btn-default">Next</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-
-var origin_pos  = {
-    lat : default_lat,
-    lng : default_lng
-};
-var dst_pos = {
-        lat : <?=$row->lat?>,
-        lng : <?=$row->lng?>
-    };
-var errorRoute = false;
-var map_detail;
-var dragged = false;
-var directionsDisplay;
-var routeDisplayed = 0;
-
-//menampilkan map detail
-function tampilDetail(){          
     
-    
-    map_detail = new google.maps.Map(document.getElementById('map'), {
-        zoom: default_zoom,
-        center: dst_pos
-    });  
-    
-    directionsDisplay = new google.maps.DirectionsRenderer({map: map_detail});
-    
-    addMarker(dst_pos, map_detail, '<?=$row->nama_tempat?>');    
-    
-    infoWindow = new google.maps.InfoWindow;
-    
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
-            
-            
-            origin_pos = pos;
-
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Lokasi anda');
-            infoWindow.open(map_detail);
-            map_detail.setCenter(pos);
-        }, function() {
-            handleLocationError(true, infoWindow, map_detail.getCenter());
-        });
-    } else {          
-        handleLocationError(false, infoWindow, map_detail.getCenter());
-    }
-}
-
-function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-    infoWindow.setPosition(pos);
-    infoWindow.setContent(browserHasGeolocation ?
-                          'Error: The Geolocation service failed.' :
-                          'Error: Your browser doesn\'t support geolocation.');
-    infoWindow.open(map);
-}
-
-//menampilkan rute lokasi
-function showRoute(){                               
-    var directionsService = new google.maps.DirectionsService;
-    var directionsDisplay = new google.maps.DirectionsRenderer;
-    directionsDisplay.setMap(map_detail);    
-    calculateAndDisplayRoute(directionsService, directionsDisplay);       
-    console.log('Route displayed ' + ++routeDisplayed);
-}
-
-function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-    directionsService.route({
-          origin: origin_pos,
-          destination: dst_pos,
-          travelMode: 'DRIVING'
-    }, function(response, status) {
-      if (status === 'OK') {
-        directionsDisplay.setDirections(response);
-      } else {
-        window.alert('Directions request failed due to ' + status);
-      }
-    });
-}
-
-$(function(){
-    tampilDetail();    
-})
-
-$(document).ready(function(){
-
-    loadGallery(true, 'a.thumbnail');
-
-    //This function disables buttons when needed
-    function disableButtons(counter_max, counter_current){
-        $('#show-previous-image, #show-next-image').show();
-        if(counter_max == counter_current){
-            $('#show-next-image').hide();
-        } else if (counter_current == 1){
-            $('#show-previous-image').hide();
-        }
-    }
-
-    /**
-     *
-     * @param setIDs        Sets IDs when DOM is loaded. If using a PHP counter, set to false.
-     * @param setClickAttr  Sets the attribute for the click handler.
-     */
-
-    function loadGallery(setIDs, setClickAttr){
-        var current_image,
-            selector,
-            counter = 0;
-
-        $('#show-next-image, #show-previous-image').click(function(){
-            if($(this).attr('id') == 'show-previous-image'){
-                current_image--;
-            } else {
-                current_image++;
+    <footer class="footer bg-primary">
+      <div class="container">
+        <p>Copyright &copy; <?=date('Y')?> Deni Setiawan <em class="pull-right">7 Desember 2020</em></p>
+      </div>
+    </footer>
+</body>
+<script type="text/javascript">
+        window.onload = function () {
+            var mapOptions = {
+                center: new google.maps.LatLng(-7.7955798,110.3694896),
+                zoom: 13,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }; 
+            var infoWindow = new google.maps.InfoWindow();
+            var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+            for (i = 0; i < markers.length; i++) {
+                var data = markers[i];
+                var latnya = data.latitude;
+                var longnya = data.longitude;
+                
+                var myLatlng = new google.maps.LatLng(latnya, longnya);
+                var marker = new google.maps.Marker({
+                    position: myLatlng,
+                    map: map
+                });
+                    (function (marker, data) {
+                        google.maps.event.addListener(marker, "click", function (e) {
+                            infoWindow.setContent('<h5>Nama Konter</b> :'+ data.nama_konter );
+                            infoWindow.open(map, marker);
+                        });
+                    })(marker, data);              
             }
-
-            selector = $('[data-image-id="' + current_image + '"]');
-            updateGallery(selector);
-        });
-
-        function updateGallery(selector) {
-            var $sel = selector;
-            current_image = $sel.data('image-id');
-            $('#image-gallery-caption').text($sel.data('caption'));
-            $('#image-gallery-title').text($sel.data('title'));
-            $('#image-gallery-image').attr('src', $sel.data('image'));
-            disableButtons(counter, $sel.data('image-id'));
+            
         }
-
-        if(setIDs == true){
-            $('[data-image-id]').each(function(){
-                counter++;
-                $(this).attr('data-image-id',counter);
-            });
-        }
-        $(setClickAttr).on('click',function(){
-            updateGallery($(this));
-        });
-    }
-});
-</script>
+    </script>
+</html>

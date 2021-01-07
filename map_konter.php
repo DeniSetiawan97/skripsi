@@ -107,8 +107,30 @@
                             infoWindow.setContent('<h5>Nama Konter</b> :'+ data.nama_konter +'</h5>'+'<p align="center"><a href="detail_konter.php?id_konter='+data.id_konter+'" class="link_detail btn btn-primary">Lihat Detail');
                             infoWindow.open(map, marker);
                         });
-                    })(marker, data);
+                    })(marker, data);              
             }
+
+            if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            
+            
+            origin_pos = pos;
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Lokasi anda saat ini');
+            infoWindow.open(map_detail);
+            map_detail.setCenter(pos);
+        }, function() {
+            handleLocationError(true, infoWindow, map_detail.getCenter());
+        });
+    } else {          
+        handleLocationError(false, infoWindow, map_detail.getCenter());
+    }
+            
         }
     </script>
     </div>

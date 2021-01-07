@@ -37,39 +37,6 @@ if($_SESSION['level']=="") {
     <link href="assets/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="assets/css/demo.css" rel="stylesheet" />
-
-    <style>
-        .comment {
-            float: left;
-            width: 100%;
-            height: auto;
-        }
-
-        .commenter {
-            float: left;
-        }
-
-        .commenter img {
-            width: 35px;
-            height: 35px;
-        }
-
-        .comment-text-area {
-            float: left;
-            width: 100%;
-            height: auto;
-        }
-
-        .textinput {
-            float: left;
-            width: 100%;
-            min-height: 75px;
-            outline: none;
-            resize: none;
-            border: 1px solid grey;
-        }
-    </style>
-
 </head>
 
 <body>
@@ -189,66 +156,63 @@ if($_SESSION['level']=="") {
             </nav>
             <!-- End Navbar -->
 
+            <?php
+                include "../koneksi.php";
+                $id_user = $_SESSION['id_user'];
+                
+                $query = "SELECT * FROM konter_servis WHERE id_user='$id_user'";
+                $hasil	= mysqli_query($conn, $query);
+                if (!$hasil){
+                    die("Gagal AMbil Data...");
+                }
+            ?>
+
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-8">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Edit Profile</h4>
+                        <div class="col-md-12">
+                            <div class="card strpied-tabled-with-hover">
+                                <div class="card-header ">
+                                    <h4 class="card-title">Daftar User</h4>
+                                    <p class="card-category">Daftar Pemilik Dan Pengunjung Teregistrasi</p>                                    
+                                    <a href="tambah_toko.php" name="add" class="btn btn-info btn-sm btn-fill pull-right">Tamabah Toko</a>
                                 </div>
-                                <div class="card-body">
-                                    <form action="php/simpan_toko.php" method="post" enctype="multipart/form-data">
-                                        <div class="row">
-                                            <div class="col-md-5 pr-1">
-                                                <div class="form-group">
-                                                    <label>Nama Konter</label>
-                                                    <input type="text" class="form-control" name="nama_konter" placeholder="Nama Konter">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-5 pr-1">
-                                                <div class="form-line">
-                                                    <label>Layanan Antar Jemput</label>
-                                                        <select class="form-control" name="antar_jemput" required>
-                                                            <option value="" disabled selected>Silahkan Pilih</option>
-                                                            <option value="ya">YA</option>
-                                                            <option value="tidak">TIDAK</option>
-                                                        </select>
-                                                </div>
-                                            </div>                                            
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6 pr-2">
-                                            <label>Layanan Antar Jemput</label>
-                                                <div class="comment">
-                                                    <textarea class="textinput" placeholder="Comment"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4 pr-1">
-                                                <div class="form-group">
-                                                    <label>Latitude</label>
-                                                        <input type="text" class="form-control" name="latitude" placeholder="Latitude">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 pr-1">
-                                                <div class="form-group">
-                                                    <label>Longitude</label>
-                                                        <input type="text" class="form-control" name="longitude" placeholder="longitude">
-                                                </div>
-                                            </div>  
-                                        </div>
-                                        <button type="submit" name="submit" class="btn btn-info btn-fill pull-right">Tambah Toko</button>
-                                        
-                                            <a class="btn btn-danger" href="toko.php">Kembali</a><span class="glyphicon glyphicon-arrow-left"></span>
-                                        
-                                    </form>
+                                <div class="card-body table-full-width table-responsive">
+                                
+                                    <table class="table table-hover table-striped">
+                                        <thead>
+                                            <th>No</th>
+                                            <th>Nama Konter</th>
+                                            <th>Detail Konter</th>
+                                            <th>Antar Jemput</th>
+                                            <th>Latitude</th>
+                                            <th>Longitude</th>
+                                            <th>Aksi</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                            <?php
+                                                $no = 0;
+                                                while($data = mysqli_fetch_array($hasil)) {
+                                                    $no++;
+                                                    echo "<td>$no</td>";
+                                                    echo "<td>".$data['nama_konter']."</td>"
+                                                        ."<td>".$data['detail_konter']."</td>"
+                                                        ."<td>".$data['antar_jemput']."</td>"
+                                                        ."<td>".$data['latitude']."</td>"
+                                                        ."<td>".$data['longitude']."</td>"
+                                                        ."<td>                                                            
+                                                            <a href='edit_toko.php?id_konter=".$data['id_konter']."' class='btn btn-primary btn-fill btn-sm'>Edit</a>
+                                                            <a href='php/hapus_toko.php?id_konter=".$data['id_konter']."' class='btn btn-danger btn-fill btn-sm'>Hapus</a>
+                                                        </td>";
+                                                    echo "</tr>";
+                                                }
+                                            ?>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div id="map" style="height: 400px;"></div>
                         </div>
                     </div>
                 </div>
@@ -386,44 +350,5 @@ if($_SESSION['level']=="") {
 <script src="assets/js/light-bootstrap-dashboard.js?v=2.0.0 " type="text/javascript"></script>
 <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
 <script src="assets/js/demo.js"></script>
-<script>
-var defaultCenter = {
-    lat : <?=get_option('default_lat')?>, 
-    lng : <?=get_option('default_lng')?>
-};
-function initMap() {
-
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: <?=get_option('default_zoom')?>,
-    center: defaultCenter 
-  });
-
-  var marker = new google.maps.Marker({
-    position: defaultCenter,
-    map: map,
-    title: 'Click to zoom',
-    draggable:true
-  });
-  
-  
-    marker.addListener('drag', handleEvent);
-    marker.addListener('dragend', handleEvent);
-    
-    var infowindow = new google.maps.InfoWindow({
-        content: '<h4>Drag untuk pindah lokasi</h4>'
-    });
-    
-    infowindow.open(map, marker);
-}
-
-function handleEvent(event) {
-    document.getElementById('lat').value = event.latLng.lat();
-    document.getElementById('lng').value = event.latLng.lng();
-}
-
-$(function(){
-    initMap();
-})
-</script>
 
 </html>
