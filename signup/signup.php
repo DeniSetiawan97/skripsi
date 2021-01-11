@@ -6,7 +6,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
 
-    <title>:: Noob Programmer::</title>
+    <title>Sistem Informasi Geografis</title>
     <!-- Favicon-->
     <link rel="icon" href="favicon.ico" type="../image/x-icon">
     <!-- Custom Css -->
@@ -23,8 +23,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="header slideDown">
-                        <div class="logo"><img src="assets/images/logo.png" alt="Nexa"></div>
-                        <h1>Noob Programmer</h1>
+                        <div class="logo"><img src="assets/images/add.png" alt="Nexa"></div>
+                        <h1>Sistem Informasi Geografis</h1>
                         <ul class="list-unstyled l-social">
                             <li><a href="#"><i class="zmdi zmdi-facebook-box"></i></a></li>
                             <li><a href="#"><i class="zmdi zmdi-linkedin-box"></i></a></li>                            

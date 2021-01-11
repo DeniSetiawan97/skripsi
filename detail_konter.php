@@ -43,7 +43,7 @@
                 $data = mysqli_fetch_array($hasil);
                 //print_r($data);
                 
-            ?>
+          ?>
             {
                 "latitude": '<?php echo $data['latitude']; ?>',
                 "longitude": '<?php echo $data['longitude']; ?>',
@@ -82,7 +82,10 @@
         </div>
         <div class="row">
             <div class="col-md-6">
+                <p>Alamat: <?=$data['alamat'];?></p>
+                <div>
                     <p>Detail: <?=$data['detail_konter'];?></p>
+                </div>
                 <div>
                     <p>Fitur Antar Jemput: <?=$data['antar_jemput'];?></p>
                 </div>
@@ -90,8 +93,7 @@
                 <div class="col-md-6">
                     <p>
                         <a href="tempat_list.php" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-chevron-left"></span> Lihat semua tempat</a>
-                        <a href="javascript:void(0)" onclick="showRoute()" class="btn btn-info btn-sm"> <span class="glyphicon glyphicon-search"></span> Tampilkan Rute </a>
-                        <a href="?m=detail&ID=<?=$_GET['ID']?>" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-list"></span> Rute Detail</a>
+                        <a href="rute/rute.php?id_konter=<?=$_GET['id_konter']?>" class="btn btn-info btn-sm"> <span class="glyphicon glyphicon-search"></span> Tampilkan Rute </a>
                     </p>
                     <div id="dvMap" style="height: 500px;"></div>
                         

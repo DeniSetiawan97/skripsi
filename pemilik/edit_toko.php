@@ -195,15 +195,22 @@ if($_SESSION['level']=="") {
                                                         <option value="ya" <?=($data['antar_jemput']=='ya')?" checked ":"";?>>YA</option>
                                                         <option value="tidak" <?=($data['antar_jemput']=='tidak')?" checked ":"";?>>TIDAK</option>
                                                     </select>
-                                            </div>
-                                                                                       
+                                            </div>                                                                                       
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-10 pr-2">
+                                                <div class="form-group">
+                                                    <label>Alamat Konter</label>
+                                                    <input type="text" class="form-control" name="alamat" value = "<?=$data['alamat'];?>">
+                                                </div>
+                                            </div> 
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                <label class="control-label col-sm-2">Detail Konter</label>
-                                                    <div class="col-sm-10">
-                                                        <input type="text" class="form-control" name="detail_konter" value = "<?=$data['detail_konter'];?>">
+                                                <label>Deskripsi Konter</label>
+                                                    <div class="comment">
+                                                        <textarea cols="70" rows="7" class="textinput" name="detail_konter"><?=$data['detail_konter'];?></textarea>
                                                     </div>
                                                 </div>
                                             </div>

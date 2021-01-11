@@ -158,7 +158,7 @@ if($_SESSION['level']=="") {
 
             <?php
                 include "../koneksi.php";
-                $id_user = $_SESSION['id_user'];
+                $id_user = $_GET['id_user'];
                 
                 $query = "SELECT * FROM konter_servis WHERE id_user='$id_user'";
                 $hasil	= mysqli_query($conn, $query);
@@ -201,8 +201,7 @@ if($_SESSION['level']=="") {
                                                         ."<td>".$data['antar_jemput']."</td>"
                                                         ."<td>".$data['latitude']."</td>"
                                                         ."<td>".$data['longitude']."</td>"
-                                                        ."<td>                                                            
-                                                            <a href='edit_toko.php?id_konter=".$data['id_konter']."' class='btn btn-primary btn-fill btn-sm'>Edit</a>
+                                                        ."<td>                                               
                                                             <a href='php/hapus_toko.php?id_konter=".$data['id_konter']."' class='btn btn-danger btn-fill btn-sm'>Hapus</a>
                                                         </td>";
                                                     echo "</tr>";

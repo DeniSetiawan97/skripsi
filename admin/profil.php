@@ -1,10 +1,12 @@
 <?php
 session_start();
 if($_SESSION['level']=="") {
-    header("Location: ../admin/table.php");
+    header("Location: ../login/login.php");
 }
 
 ?>
+
+
 <!--
 =========================================================
  Light Bootstrap Dashboard - v2.0.1
@@ -41,7 +43,7 @@ if($_SESSION['level']=="") {
 
 <body>
     <div class="wrapper">
-        <div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
+        <div class="sidebar" data-image="assets/img/sidebar-5.jpg">
             <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
@@ -57,25 +59,25 @@ if($_SESSION['level']=="") {
                     <li>
                         <a class="nav-link" href="dashboard.php">
                             <i class="nc-icon nc-chart-pie-35"></i>
-                            <p>Dashboard</p>
+                            <p>Dasbor</p>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="profil.php">
+                            <i class="nc-icon nc-circle-09"></i>
+                            <p>Profil Anda</p>
                         </a>
                     </li>
                     <li>
                         <a class="nav-link" href="user.php">
-                            <i class="nc-icon nc-circle-09"></i>
-                            <p>User Profile</p>
-                        </a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="table.php">
                             <i class="nc-icon nc-notes"></i>
-                            <p>Table List</p>
+                            <p>User</p>
                         </a>
                     </li>
                     <li>
                         <a class="nav-link" href="maps.php">
                             <i class="nc-icon nc-pin-3"></i>
-                            <p>Maps</p>
+                            <p>Lokasi Konter</p>
                         </a>
                     </li>
                     <li>
@@ -91,60 +93,10 @@ if($_SESSION['level']=="") {
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#pablo"> Table List </a>
-                    <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-bar burger-lines"></span>
-                        <span class="navbar-toggler-bar burger-lines"></span>
-                        <span class="navbar-toggler-bar burger-lines"></span>
-                    </button>
+                    <p class="navbar-brand"> Profil Anda </p>                    
                     <div class="collapse navbar-collapse justify-content-end" id="navigation">
-                        <ul class="nav navbar-nav mr-auto">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link" data-toggle="dropdown">
-                                    <i class="nc-icon nc-palette"></i>
-                                    <span class="d-lg-none">Dashboard</span>
-                                </a>
-                            </li>
-                            <li class="dropdown nav-item">
-                                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                                    <i class="nc-icon nc-planet"></i>
-                                    <span class="notification">5</span>
-                                    <span class="d-lg-none">Notification</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Notification 1</a>
-                                    <a class="dropdown-item" href="#">Notification 2</a>
-                                    <a class="dropdown-item" href="#">Notification 3</a>
-                                    <a class="dropdown-item" href="#">Notification 4</a>
-                                    <a class="dropdown-item" href="#">Another notification</a>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="nc-icon nc-zoom-split"></i>
-                                    <span class="d-lg-block">&nbsp;Search</span>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#pablo">
-                                    <span class="no-icon">Account</span>
-                                </a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="no-icon">Dropdown</span>
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                    <div class="divider"></div>
-                                    <a class="dropdown-item" href="#">Separated link</a>
-                                </div>
-                            </li>
+                        
+                        <ul class="navbar-nav ml-auto">                            
                             <li class="nav-item">
                                 <a class="nav-link" href="logout.php">
                                     <span class="no-icon">Log out</span>
@@ -155,59 +107,110 @@ if($_SESSION['level']=="") {
                 </div>
             </nav>
             <!-- End Navbar -->
-
+            
             <?php
                 include "../koneksi.php";
-                
-                $query = "SELECT * FROM user WHERE level IN ('pemilik','Pengunjung') order by nama asc";
-                $hasil	= mysqli_query($conn, $query);
-                if (!$hasil){
-                    die("Gagal AMbil Data...");
-                }
+                $id_user = $_SESSION['id_user'];
+
+                $query = "SELECT * FROM user WHERE id_user = '$id_user'";
+                $hasil = mysqli_query ($conn, $query);
+                //mysqli_error($id_user);
+                if (!$hasil) die ("Gagal query ...");
+                    
+                $data = mysqli_fetch_array($hasil);
+                //print_r($data);
+
             ?>
 
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="card strpied-tabled-with-hover">
-                                <div class="card-header ">
-                                    <h4 class="card-title">Daftar User</h4>
-                                    <p class="card-category">Daftar Pemilik Dan Pengunjung Teregistrasi</p>
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Edit Profile</h4>
                                 </div>
-                                <div class="card-body table-full-width table-responsive">
-                                    <table class="table table-hover table-striped">
-                                        <thead>
-                                            <th>No</th>
-                                            <th>Nama</th>
-                                            <th>Username</th>
-                                            <th>No Telpon</th>
-                                            <th>Email</th>
-                                            <th>Level</th>
-                                            <th>Aksi</th>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                            <?php
-                                                $no = 0;
-                                                while($data = mysqli_fetch_array($hasil)) {
-                                                    $no++;
-                                                    echo "<td>$no</td>";
-                                                    echo "<td>".$data['nama']."</td>"
-                                                        ."<td>".$data['username']."</td>"
-                                                        ."<td>".$data['no_tlp']."</td>"
-                                                        ."<td>".$data['email']."</td>"
-                                                        ."<td>".$data['level']."</td>"
-                                                        ."<td>
-                                                            <a href='hapus.php?id_user=".$data['id_user']."' class='btn btn-xs btn-danger'>Hapus</a>
-                                                            <a href='det_toko.php?id_user=".$data['id_user']."' class='btn btn-xs btn-primar'>Toko</a>
-                                                        </td>";
-                                                    echo "</tr>";
-                                                }
-                                            ?>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="card-body">
+                                    <form action="update.php?id_user=<?php echo $data['id_user'];?> " method="post">
+                                        <div class="row">
+                                            <div class="col-md-5 pr-1">
+                                                <div class="form-group">
+                                                    <label>Status (disabled)</label>
+                                                    <input type="text" class="form-control" disabled="" placeholder="Status" value = "<?=$data['level'];?>">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 px-1">
+                                                <div class="form-group">
+                                                    <label>Nama</label>
+                                                    <input type="text" class="form-control" name="nama" placeholder="Nama" value="<?=$data['nama'];?>">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 pl-1">
+                                                <div class="form-group">
+                                                    <label>No.Telpon</label>
+                                                    <input type="number" class="form-control" name="no_tlp" placeholder="No.Telpon" value="<?=$data['no_tlp'];?>">
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                <label for="exampleInputEmail1">Email</label>
+                                                    <input type="email" class="form-control" name="email" placeholder="email" value="<?=$data['email'];?>">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 pr-1">
+                                                <div class="form-group">
+                                                    <label>Username</label>
+                                                    <input type="text" class="form-control" name="username" placeholder="Username" value="<?=$data['username'];?>">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 px-1">
+                                                <div class="form-group">
+                                                    <label>Password</label>
+                                                    <input type="text" class="form-control" name="password" placeholder="Password" value="<?=$data['password'];?>">
+                                                </div>
+                                            </div>  
+                                        </div>
+                                        <button type="submit" name="update" class="btn btn-info btn-fill pull-right">Update Profile</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card card-user">
+                                <div class="card-image">
+                                    <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="...">
+                                </div>
+                                <div class="card-body">
+                                    <div class="author">
+                                        <a href="#">
+                                            <img class="avatar border-gray" src="assets/img/faces/face-3.jpg" alt="...">
+                                            <h5 class="title"><?php echo $data['nama']; ?></h5>
+                                        </a>
+                                        <p class="description">
+                                            <?php echo $data['username']; ?>
+                                        </p>
+                                    </div>
+                                    <p class="description text-center">
+                                        "Lamborghini Mercy
+                                        <br> Your chick she so thirsty
+                                        <br> I'm in that two seat Lambo"
+                                    </p>
+                                </div>
+                                <hr>
+                                <div class="button-container mr-auto ml-auto">
+                                    <button href="#" class="btn btn-simple btn-link btn-icon">
+                                        <i class="fa fa-facebook-square"></i>
+                                    </button>
+                                    <button href="#" class="btn btn-simple btn-link btn-icon">
+                                        <i class="fa fa-twitter"></i>
+                                    </button>
+                                    <button href="#" class="btn btn-simple btn-link btn-icon">
+                                        <i class="fa fa-google-plus-square"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>

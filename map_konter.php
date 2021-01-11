@@ -109,27 +109,6 @@
                         });
                     })(marker, data);              
             }
-
-            if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
-            
-            
-            origin_pos = pos;
-
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Lokasi anda saat ini');
-            infoWindow.open(map_detail);
-            map_detail.setCenter(pos);
-        }, function() {
-            handleLocationError(true, infoWindow, map_detail.getCenter());
-        });
-    } else {          
-        handleLocationError(false, infoWindow, map_detail.getCenter());
-    }
             
         }
     </script>

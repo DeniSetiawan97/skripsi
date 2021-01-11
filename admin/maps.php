@@ -1,3 +1,12 @@
+<?php
+include("../koneksi.php");
+
+session_start();
+if($_SESSION['level']=="") {
+    header("Location: ../login/login.php");
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,58 +25,58 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="assets/css/demo.css" rel="stylesheet" />
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2t66MDpj3mi7QnqPODUOb25VtT6VnOaA&callback=initialize" async defer></script>
-    <script type="text/javascript">   
-        var marker;
-        function initialize(){
-            // Variabel untuk menyimpan informasi lokasi
-            var infoWindow = new google.maps.InfoWindow;
-            //  Variabel berisi properti tipe peta
+    <script type="text/javascript">
+        var markers = [
+        <?php
+            $sql = mysqli_query($conn, "SELECT * FROM konter_servis");
+            while(($data =  mysqli_fetch_assoc($sql))) {
+        ?>
+        {
+            "latitude": '<?php echo $data['latitude']; ?>',
+            "longitude": '<?php echo $data['longitude']; ?>',
+            "nama_konter": '<?php echo $data['nama_konter']; ?>',
+            "id_konter": '<?php echo $data['id_konter']; ?>'
+        },
+        <?php
+        }
+        ?>
+        ];
+    </script>
+    <script type="text/javascript">
+        window.onload = function () {
             var mapOptions = {
+                center: new google.maps.LatLng(-7.7955798,110.3694896),
+                zoom: 13,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
-            } 
-            // Pembuatan peta
-            var peta = new google.maps.Map(document.getElementById('googleMap'), mapOptions);      
-            // Variabel untuk menyimpan batas kordinat
-            var bounds = new google.maps.LatLngBounds();
-            // Pengambilan data dari database MySQL
-            <?php
-
-            include "../koneksi.php";
-
-            $query = mysqli_query($conn,"SELECT * FROM konter_servis");
-            while ($row = $query->fetch_assoc()) {
-                $nama = $row["nama_konter"];
-                $lat  = $row["latitude"];
-                $long = $row["longitude"];
-                echo "addMarker($lat, $long, '$nama');";
-            }
+            }; 
+            var infoWindow = new google.maps.InfoWindow();
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
+            for (i = 0; i < markers.length; i++) {
+                var data = markers[i];
+                var latnya = data.latitude;
+                var longnya = data.longitude;
                 
-            ?> 
-            // Proses membuat marker 
-            function addMarker(lat, lng, info){
-                var lokasi = new google.maps.LatLng(lat, lng);
-                bounds.extend(lokasi);
+                var myLatlng = new google.maps.LatLng(latnya, longnya);
                 var marker = new google.maps.Marker({
-                    map: peta,
-                    position: lokasi
-                });       
-                peta.fitBounds(bounds);
-                bindInfoWindow(marker, peta, infoWindow, info);
+                    position: myLatlng,
+                    map: map,
+                    title: data.nama_konter
+                });
+                    (function (marker, data) {
+                        google.maps.event.addListener(marker, "click", function (e) {
+                            infoWindow.setContent('<h5>Nama Konter</b> :'+ data.nama_konter +'</h5>'+'<p align="center"><a href="det_toko.php?id_konter='+data.id_konter+'" class="link_detail btn btn-primary">Lihat Detail');
+                            infoWindow.open(map, marker);
+                        });
+                    })(marker, data);              
             }
-            // Menampilkan informasi pada masing-masing marker yang diklik
-            function bindInfoWindow(marker, peta, infoWindow, html){
-                google.maps.event.addListener(marker, 'click', function() {
-                infoWindow.setContent(html);
-                infoWindow.open(peta, marker);
-            });
-            }
+            
         }
     </script>
 </head>
 <body>
 
     <div class="wrapper">
-        <div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
+        <div class="sidebar" data-image="assets/img/sidebar-5.jpg">
             <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
@@ -83,25 +92,25 @@
                     <li>
                         <a class="nav-link" href="dashboard.php">
                             <i class="nc-icon nc-chart-pie-35"></i>
-                            <p>Dashboard</p>
+                            <p>Dasbor</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="profil.php">
+                            <i class="nc-icon nc-circle-09"></i>
+                            <p>Profil Anda</p>
                         </a>
                     </li>
                     <li>
                         <a class="nav-link" href="user.php">
-                            <i class="nc-icon nc-circle-09"></i>
-                            <p>User Profile</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="table.php">
                             <i class="nc-icon nc-notes"></i>
-                            <p>Table List</p>
+                            <p>User</p>
                         </a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="maps.php">
                             <i class="nc-icon nc-pin-3"></i>
-                            <p>Maps</p>
+                            <p>Lokasi Konter</p>
                         </a>
                     </li>
                     <li>
@@ -117,60 +126,9 @@
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#pablo"> Maps </a>
-                    <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-bar burger-lines"></span>
-                        <span class="navbar-toggler-bar burger-lines"></span>
-                        <span class="navbar-toggler-bar burger-lines"></span>
-                    </button>
-                    <div class="collapse navbar-collapse justify-content-end" id="navigation">
-                        <ul class="nav navbar-nav mr-auto">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link" data-toggle="dropdown">
-                                    <i class="nc-icon nc-palette"></i>
-                                    <span class="d-lg-none">Dashboard</span>
-                                </a>
-                            </li>
-                            <li class="dropdown nav-item">
-                                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                                    <i class="nc-icon nc-planet"></i>
-                                    <span class="notification">5</span>
-                                    <span class="d-lg-none">Notification</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Notification 1</a>
-                                    <a class="dropdown-item" href="#">Notification 2</a>
-                                    <a class="dropdown-item" href="#">Notification 3</a>
-                                    <a class="dropdown-item" href="#">Notification 4</a>
-                                    <a class="dropdown-item" href="#">Another notification</a>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="nc-icon nc-zoom-split"></i>
-                                    <span class="d-lg-block">&nbsp;Search</span>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#pablo">
-                                    <span class="no-icon">Account</span>
-                                </a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="no-icon">Dropdown</span>
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                    <div class="divider"></div>
-                                    <a class="dropdown-item" href="#">Separated link</a>
-                                </div>
-                            </li>
+                    <p class="navbar-brand" > Lokasi Konter </p>                    
+                    <div class="collapse navbar-collapse justify-content-end" id="navigation">                        
+                        <ul class="navbar-nav ml-auto">                            
                             <li class="nav-item">
                                 <a class="nav-link" href="logout.php">
                                     <span class="no-icon">Log out</span>
