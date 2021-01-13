@@ -1,7 +1,7 @@
 <?php
 session_start();
 if($_SESSION['level']=="") {
-    header("Location: ../admin/notifications.php");
+    header("Location: ../login/login.php");
 }
 
 ?>

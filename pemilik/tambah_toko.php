@@ -178,7 +178,7 @@ if($_SESSION['level']=="") {
                                             <div class="col-md-11 pr-5">
                                             <label>Deskripsi Konter</label>
                                                 <div class="comment">
-                                                    <textarea rows="7" class="textinput" name="detail_konter" placeholder="Deskripsi Konter"></textarea>
+                                                    <textarea rows="3" class="textinput" name="detail_konter" placeholder="Deskripsi Konter"></textarea>
                                                 </div>
                                             </div>
                                         </div>

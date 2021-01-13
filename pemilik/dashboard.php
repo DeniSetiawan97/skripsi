@@ -86,6 +86,12 @@ if($_SESSION['level']=="") {
                             <p>Notifications</p>
                         </a>
                     </li>
+                    <li>
+                        <a class="nav-link" href="../index.php">
+                            <i class="nc-icon nc-bell-55"></i>
+                            <p>Kembali</p>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

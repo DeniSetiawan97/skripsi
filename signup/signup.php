@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/authentication.css">
     <link rel="stylesheet" href="assets/css/color_skins.css">
+    <link rel="stylesheet" href="assets/css/intlTelInput.css">
+    <link rel="stylesheet" href="assets/css/demo.css">
 </head>
 
 <body class="theme-orange">
@@ -90,5 +92,12 @@
 <script src="assets/bundles/libscripts.bundle.js"></script>    
 <script src="assets/bundles/vendorscripts.bundle.js"></script>
 <script src="assets/bundles/mainscripts.bundle.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="js/intlTelInput.js"></script>
+  <script>
+    $("#phone").intlTelInput({
+      utilsScript: "js/utils.js"
+    });
+  </script>
 </body>
 </html>
