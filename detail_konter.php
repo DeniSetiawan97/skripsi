@@ -12,7 +12,9 @@
 
     <title>Sistem Informasi Geografis</title>
     <link href="assets/css/solar-bootstrap.min.css" rel="stylesheet"/>
-    <link href="assets/css/general.css" rel="stylesheet"/>
+    <link href="assets/css/general.css" rel="stylesheet"/> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
     <style>
       	-webkit-box-sizing:border-box;
 	-moz-box-sizing:border-box;
@@ -194,38 +196,13 @@
                 </div>
                 <div>
                     <p>Fitur Antar Jemput: <?=$data['antar_jemput'];?></p>
-                </div>
-                <div>
-                  <div class="col-md-12">
-                      <div class="card">
-                        <div id="whatsapp" class="toggle">
-
-                            <input class="tujuan" type="hidden" value="<?=$data['no_tlp'];?>" /> <!-- No. WhatsApp -->
-
-                            <label>Nama :
-                            <input class="nama" type="text" placeholder="Tulis Nama Lengkap." />
-                            </label>
-                            <label>Alamat :
-                            <input class="alamat" type="alamat" placeholder="contoh : Jl.Tamansari I RT 002/008 No.1 Kel.Pekayon Kec.Ps Rebo Jak Tim." />
-                            </label>
-                            <label>Nomor telepon :
-                            <input class="nomor" type="nomor" placeholder="contoh : 082225204112.." />
-                            </label>
-                            <label>Keluhan :
-                            <textarea class="keluhan" placeholder="contoh: Hp saya mati tiba tiba"></textarea>
-                            </label>
-                            <a class="submit">> KIRIM WHATSAPP</a>
-
-                        </div>
-                      </div>
-                  </div>
-                </div>
+                </div>                
             </div>
                 <div class="col-md-6">
                     <p>
                         <a href="tempat_list.php" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-chevron-left"></span> Lihat semua tempat</a>
                         <a href="rute/rute.php?id_konter=<?=$_GET['id_konter']?>" class="btn btn-info btn-sm"> <span class="glyphicon glyphicon-search"></span> Tampilkan Rute </a>
-                        <a href="https://api.whatsapp.com/send?phone=6282281611772&text=Saya%0Atertarik%0Auntuk%0Aberlangganan%0AKIRIM.EMAIL" target="_blank" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-envelope"></span> Kirim Pesan</a>
+                        <a href="#" name="age" id="age" data-toggle="modal" data-target="#add_data_Modal" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-envelope"></span> Kirim Pesan</a>
                     </p>
                     <div id="dvMap" style="height: 500px;"></div>
                         
@@ -270,66 +247,99 @@
             
         }
     </script>
+</html>
+  
+<div>  
+  <div id="add_data_Modal" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Silahkan Isi Pesan</h4>
+        </div>
+        <div id="whatsapp" class="toggle">
+          <input class="tujuan" type="hidden" value="<?=$data['no_tlp'];?>" /> <!-- No. WhatsApp -->
+
+          <label>Nama :
+            <input class="nama" type="text" placeholder="Tulis Nama Lengkap." />
+          </label>
+          <label>Alamat :
+            <input class="alamat" type="alamat" placeholder="contoh : Jl.Tamansari I RT 002/008 No.1 Kel.Pekayon Kec.Ps Rebo Jak Tim." />
+          </label>
+          <label>Nomor telepon :
+            <input class="nomor" type="nomor" placeholder="contoh : 082225204112.." />
+          </label>
+          <label>Keluhan :
+            <textarea class="keluhan" placeholder="contoh: Hp saya mati tiba tiba"></textarea>
+          </label>
+            <a class="submit">> KIRIM WHATSAPP</a>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
- $('.whatsapp-btn').click(function(){
-	$('#whatsapp').toggleClass('toggle');
-});
-// Onclick Whatsapp Sent!
-$('#whatsapp .submit').click(WhatsApp);
+  $('.whatsapp-btn').click(function(){
+  $('#whatsapp').toggleClass('toggle');
+  });
+  // Onclick Whatsapp Sent!
+  $('#whatsapp .submit').click(WhatsApp);
 
-$("#whatsapp input, #whatsapp textarea").keypress(function() {
-	if (event.which == 13) WhatsApp();
-});
-var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-function WhatsApp() {
-	var ph = '';
-	if ($('#whatsapp .nama').val() == '') { // Cek Nama
-		ph = $('#whatsapp .nama').attr('placeholder');
-		alert('Silahkan tulis ' + ph);
-		$('#whatsapp .nama').focus();
-		return false;
-	} else if ($('#whatsapp .alamat').val() == '') { // Cek alamat
-		ph = $('#whatsapp .alamat').attr('placeholder');
-		alert('Silahkan tulis ' + ph);
-		$('#whatsapp .alamat').focus();
-		return false;
-	} else if ($('#whatsapp .nomor').val() == '') { // Cek Nomor
-		ph = $('#whatsapp .nomor').attr('placeholder');
-		alert('Silahkan tulis ' + ph);
-		$('#whatsapp .nomor').focus();
-		return false;
-	} else if ($('#whatsapp .keluhan').val() == '') { // Cek Pesan
-		ph = $('#whatsapp .keluhan').attr('placeholder');
-		alert('Silahkan tulis ' + ph);
-		$('#whatsapp .keluhan').focus();
-		return false;
-	} else {
-		if (!confirm("Kirim Ke WhatsApp?")) {
-			window.open("https://www.whatsapp.com/download/");
-		} else {
-			// Check Device (Mobile/Desktop)
-			var url_wa = 'https://web.whatsapp.com/send';
-			if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-				url_wa = 'whatsapp://send/';
-			}
-			// Get Value
-			var tujuan = $('#whatsapp .tujuan').val(),
-					via_url = location.href,
-					nama = $('#whatsapp .nama').val(),
-					alamat = $('#whatsapp .alamat').val(),
-          nomor = $('#whatsapp .nomor').val(),
-          keluhan = $('#whatsapp .keluhan').val();
-			$(this).attr('href', url_wa + '?phone=62 ' + tujuan + '&text=Halo saya ingin memperbaiki hand phone, saya *' + nama + '* %0A%0AAlamat:%20' + alamat +' %0A%0ANo.tlp:%20'+ nomor + ' %0A%0AKeluhan:%20' + keluhan + '%0A%0AMohon dibantu total dan cara pembayarannya kak');
-			var w = 960,
-					h = 540,
-					left = Number((screen.width / 2) - (w / 2)),
-					tops = Number((screen.height / 2) - (h / 2)),
-					popupWindow = window.open(this.href, '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=1, copyhistory=no, width=' + w + ', height=' + h + ', top=' + tops + ', left=' + left);
-			popupWindow.focus();
-			return false;
-		}
-	}
-}
+  $("#whatsapp input, #whatsapp textarea").keypress(function() {
+    if (event.which == 13) WhatsApp();
+  });
+  var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+  function WhatsApp() {
+    var ph = '';
+    if ($('#whatsapp .nama').val() == '') { // Cek Nama
+      ph = $('#whatsapp .nama').attr('placeholder');
+      alert('Silahkan tulis ' + ph);
+      $('#whatsapp .nama').focus();
+      return false;
+    } else if ($('#whatsapp .alamat').val() == '') { // Cek alamat
+      ph = $('#whatsapp .alamat').attr('placeholder');
+      alert('Silahkan tulis ' + ph);
+      $('#whatsapp .alamat').focus();
+      return false;
+    } else if ($('#whatsapp .nomor').val() == '') { // Cek Nomor
+      ph = $('#whatsapp .nomor').attr('placeholder');
+      alert('Silahkan tulis ' + ph);
+      $('#whatsapp .nomor').focus();
+      return false;
+    } else if ($('#whatsapp .keluhan').val() == '') { // Cek Pesan
+      ph = $('#whatsapp .keluhan').attr('placeholder');
+      alert('Silahkan tulis ' + ph);
+      $('#whatsapp .keluhan').focus();
+      return false;
+    } else {
+      if (!confirm("Kirim Ke WhatsApp?")) {
+        window.open("https://www.whatsapp.com/download/");
+      } else {
+        // Check Device (Mobile/Desktop)
+        var url_wa = 'https://web.whatsapp.com/send';
+        if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+          url_wa = 'whatsapp://send/';
+        }
+        // Get Value
+        var tujuan = $('#whatsapp .tujuan').val(),
+            via_url = location.href,
+            nama = $('#whatsapp .nama').val(),
+            alamat = $('#whatsapp .alamat').val(),
+            nomor = $('#whatsapp .nomor').val(),
+            keluhan = $('#whatsapp .keluhan').val();
+        $(this).attr('href', url_wa + '?phone=62 ' + tujuan + '&text=Halo saya ingin memperbaiki hand phone, saya *' + nama + '* %0A%0AAlamat:%20' + alamat +' %0A%0ANo.tlp:%20'+ nomor + ' %0A%0AKeluhan:%20' + keluhan + '%0A%0AMohon dibantu perbaikan hand phone saya');
+        var w = 960,
+            h = 540,
+            left = Number((screen.width / 2) - (w / 2)),
+            tops = Number((screen.height / 2) - (h / 2)),
+            popupWindow = window.open(this.href, '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=1, copyhistory=no, width=' + w + ', height=' + h + ', top=' + tops + ', left=' + left);
+        popupWindow.focus();
+        return false;
+      }
+    }
+  }
 </script>
-</html>

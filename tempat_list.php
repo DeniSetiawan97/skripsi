@@ -64,7 +64,7 @@
                             <th>No</th>
                             <th>Nama Konter</th>
                             <th>Layanan Antar Jemput</th>
-                            <th>Detail Konter</th>
+                            <th>Alamat</th>
                             <th>Aksi</th>                
                         </tr>
                     </thead>
@@ -86,7 +86,7 @@
                             echo "<td>$no</td>";
                             echo "<td>".$data['nama_konter']."</td>"
                                 ."<td>".$data['antar_jemput']."</td>"
-                                ."<td>".$data['detail_konter']."</td>"
+                                ."<td>".$data['alamat']."</td>"
                                 ."<td>
                                   <a href='detail_konter.php?id_konter=".$data['id_konter']."' class='btn btn-success'>Lihat detail</a>
                                 </td>";
