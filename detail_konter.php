@@ -266,9 +266,6 @@
           <label>Alamat :
             <input class="alamat" type="alamat" placeholder="contoh : Jl.Tamansari I RT 002/008 No.1 Kel.Pekayon Kec.Ps Rebo Jak Tim." />
           </label>
-          <label>Nomor telepon :
-            <input class="nomor" type="nomor" placeholder="contoh : 082225204112.." />
-          </label>
           <label>Keluhan :
             <textarea class="keluhan" placeholder="contoh: Hp saya mati tiba tiba"></textarea>
           </label>
@@ -305,11 +302,6 @@
       alert('Silahkan tulis ' + ph);
       $('#whatsapp .alamat').focus();
       return false;
-    } else if ($('#whatsapp .nomor').val() == '') { // Cek Nomor
-      ph = $('#whatsapp .nomor').attr('placeholder');
-      alert('Silahkan tulis ' + ph);
-      $('#whatsapp .nomor').focus();
-      return false;
     } else if ($('#whatsapp .keluhan').val() == '') { // Cek Pesan
       ph = $('#whatsapp .keluhan').attr('placeholder');
       alert('Silahkan tulis ' + ph);
@@ -329,9 +321,8 @@
             via_url = location.href,
             nama = $('#whatsapp .nama').val(),
             alamat = $('#whatsapp .alamat').val(),
-            nomor = $('#whatsapp .nomor').val(),
             keluhan = $('#whatsapp .keluhan').val();
-        $(this).attr('href', url_wa + '?phone=62 ' + tujuan + '&text=Halo saya ingin memperbaiki hand phone, saya *' + nama + '* %0A%0AAlamat:%20' + alamat +' %0A%0ANo.tlp:%20'+ nomor + ' %0A%0AKeluhan:%20' + keluhan + '%0A%0AMohon dibantu perbaikan hand phone saya');
+        $(this).attr('href', url_wa + '?phone=62 ' + tujuan + '&text=Halo saya ingin memperbaiki hand phone, saya *' + nama + '* %0A%0AAlamat:%20' + alamat + ' %0A%0AKeluhan:%20' + keluhan + '%0A%0AMohon dibantu perbaikan hand phone saya');
         var w = 960,
             h = 540,
             left = Number((screen.width / 2) - (w / 2)),
