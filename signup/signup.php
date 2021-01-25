@@ -8,14 +8,12 @@
 
     <title>Sistem Informasi Geografis</title>
     <!-- Favicon-->
-    <link rel="icon" href="favicon.ico" type="../image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <!-- Custom Css -->
     <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/authentication.css">
     <link rel="stylesheet" href="assets/css/color_skins.css">
-    <link rel="stylesheet" href="assets/css/intlTelInput.css">
-    <link rel="stylesheet" href="assets/css/demo.css">
 </head>
 
 <body class="theme-orange">
@@ -44,7 +42,7 @@
                     </div>
                     <div class="form-group form-float">
                         <div class="form-line">
-                            <input type="number" name="no_tlp" class="form-control" required>
+                            <input type="telp" name="no_tlp" class="form-control" required>
                             <label class="form-label">No.Telpon</label>
                         </div>
                     </div>
@@ -65,20 +63,18 @@
                             <input type="password" name="password" class="form-control" required>
                             <label class="form-label">Password</label>
                         </div>
-                    </div>   
+                    </div> 
                     <div class="form-group form-float">
                         <div class="form-line">
                             <select class="form-control" name="level" required>
                                 <option value="" disabled selected>Pilih Sebagai</option>
-                                <option value="pengunjung" >Pengunjung</option>
                                 <option value="pemilik" >Pemilik Toko</option>
                             </select>
                         </div>
                     </div> 
                 <div class="col-lg-12">
                     <button type="submit" value="Action" name="action" class="btn btn-raised btn-primary waves-effect">SIGN UP</button>
-                                          
-                </div>
+                    <a href="../signup/signup.php" class="btn btn-raised btn-default waves-effect">SIGN UP</a>                        </div>
                 </form>
                 <div class="col-lg-12 m-t-20">
                     <a class="" href="../login/login.php">BACK</a>
@@ -92,12 +88,5 @@
 <script src="assets/bundles/libscripts.bundle.js"></script>    
 <script src="assets/bundles/vendorscripts.bundle.js"></script>
 <script src="assets/bundles/mainscripts.bundle.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="js/intlTelInput.js"></script>
-  <script>
-    $("#phone").intlTelInput({
-      utilsScript: "js/utils.js"
-    });
-  </script>
 </body>
 </html>
