@@ -49,9 +49,7 @@ if($_SESSION['level']=="") {
     -->
             <div class="sidebar-wrapper">
                 <div class="logo">
-                    <a href="http://www.creative-tim.com" class="simple-text">
-                        Creative Tim
-                    </a>
+                    <h3>SIG</h3>
                 </div>
                 <ul class="nav">
                     <li>
@@ -78,12 +76,6 @@ if($_SESSION['level']=="") {
                             <p>Lokasi Konter</p>
                         </a>
                     </li>
-                    <li>
-                        <a class="nav-link" href="notifications.php">
-                            <i class="nc-icon nc-bell-55"></i>
-                            <p>Notifications</p>
-                        </a>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -108,7 +100,7 @@ if($_SESSION['level']=="") {
             <?php
                 include "../koneksi.php";
                 
-                $query = "SELECT * FROM user WHERE level IN ('pemilik','Pengunjung') order by nama asc";
+                $query = "SELECT * FROM user WHERE level='pemilik' order by nama asc";
                 $hasil	= mysqli_query($conn, $query);
                 if (!$hasil){
                     die("Gagal AMbil Data...");

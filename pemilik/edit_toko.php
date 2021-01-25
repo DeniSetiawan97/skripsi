@@ -49,9 +49,7 @@ if($_SESSION['level']=="") {
     -->
             <div class="sidebar-wrapper">
                 <div class="logo">
-                    <a href="http://www.creative-tim.com" class="simple-text">
-                        Creative Tim
-                    </a>
+                    <h3>SIG</h3>
                 </div>
                 <ul class="nav">
                     <li>
@@ -76,12 +74,6 @@ if($_SESSION['level']=="") {
                         <a class="nav-link" href="maps.php">
                             <i class="nc-icon nc-pin-3"></i>
                             <p>Maps</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="notifications.php">
-                            <i class="nc-icon nc-bell-55"></i>
-                            <p>Notifications</p>
                         </a>
                     </li>
                 </ul>
@@ -196,6 +188,14 @@ if($_SESSION['level']=="") {
                                                         <option value="tidak" <?=($data['antar_jemput']=='tidak')?" checked ":"";?>>TIDAK</option>
                                                     </select>
                                             </div>                                                                                       
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 pr-2">
+                                            <label>Nomor Wa</label>
+                                                <div class="form-group">
+                                                    <input type="tel" class="form-control" name="no_wa" value = "<?=$data['no_wa'];?>" required> 
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-10 pr-2">

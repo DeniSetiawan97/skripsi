@@ -82,9 +82,7 @@ if($_SESSION['level']=="") {
     -->
             <div class="sidebar-wrapper">
                 <div class="logo">
-                    <a href="http://www.creative-tim.com" class="simple-text">
-                        Creative Tim
-                    </a>
+                    <h3>SIG</h3>
                 </div>
                 <ul class="nav">
                     <li>
@@ -109,12 +107,6 @@ if($_SESSION['level']=="") {
                         <a class="nav-link" href="maps.php">
                             <i class="nc-icon nc-pin-3"></i>
                             <p>Lokasi Konter</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="notifications.php">
-                            <i class="nc-icon nc-bell-55"></i>
-                            <p>Notifications</p>
                         </a>
                     </li>
                 </ul>
@@ -152,7 +144,7 @@ if($_SESSION['level']=="") {
                                             <div class="col-md-5 pr-1">
                                                 <div class="form-group">
                                                     <label>Nama Konter</label>
-                                                    <input type="text" class="form-control" name="nama_konter" placeholder="Nama Konter">
+                                                    <input type="text" class="form-control" name="nama_konter" placeholder="Nama Konter" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-5 pr-1">
@@ -167,6 +159,14 @@ if($_SESSION['level']=="") {
                                             </div>                                            
                                         </div>
                                         <div class="row">
+                                            <div class="col-md-6 pr-2">
+                                            <label>Nomor Wa</label>
+                                                <div class="form-group">
+                                                    <input type="tel" class="form-control" name="no_wa" placeholder="Nomor Wa Anda" required> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col-md-10 pr-2">
                                             <label>Alamat Konter</label>
                                                 <div class="form-group">
@@ -178,7 +178,7 @@ if($_SESSION['level']=="") {
                                             <div class="col-md-11 pr-5">
                                             <label>Deskripsi Konter</label>
                                                 <div class="comment">
-                                                    <textarea rows="3" class="textinput" name="detail_konter" placeholder="Deskripsi Konter"></textarea>
+                                                    <textarea rows="3" class="textinput" name="detail_konter" placeholder="Deskripsi Konter" required></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -186,13 +186,13 @@ if($_SESSION['level']=="") {
                                             <div class="col-md-4 pr-1">
                                                 <div class="form-group">
                                                     <label>Latitude</label>
-                                                        <input type="text" class="form-control" name="latitude" placeholder="Latitude">
+                                                        <input type="text" class="form-control" name="latitude" placeholder="Latitude" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-4 pr-1">
                                                 <div class="form-group">
                                                     <label>Longitude</label>
-                                                        <input type="text" class="form-control" name="longitude" placeholder="longitude">
+                                                        <input type="text" class="form-control" name="longitude" placeholder="longitude" required>
                                                 </div>
                                             </div>  
                                         </div>

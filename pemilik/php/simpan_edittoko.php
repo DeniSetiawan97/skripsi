@@ -8,6 +8,7 @@
     $nama_konter    = $_POST['nama_konter'];
     $alamat         = $_POST['alamat'];
     $antar_jemput	= $_POST['antar_jemput'];
+    $no_wa          = $_POST['no_wa'];
     $detail_konter	= $_POST['detail_konter'];
     $latitude		= $_POST['latitude']; 
     $longitude		= $_POST['longitude'];
@@ -19,6 +20,7 @@
               nama_konter		= '$_POST[nama_konter]',
               alamat		    = '$_POST[alamat]',
               antar_jemput	    = '$_POST[antar_jemput]',
+              no_wa             = '$_POST[no_wa]',
               detail_konter		= '$_POST[detail_konter]',
               latitude	        = '$_POST[latitude]',
               longitude	        = '$_POST[longitude]'              

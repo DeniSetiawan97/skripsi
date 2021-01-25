@@ -51,9 +51,7 @@ if($_SESSION['level']=="") {
     -->
             <div class="sidebar-wrapper">
                 <div class="logo">
-                    <a href="http://www.creative-tim.com" class="simple-text">
-                        Creative Tim
-                    </a>
+                    <h3>SIG</h3>
                 </div>
                 <ul class="nav">
                     <li class="nav-item active">
@@ -78,18 +76,6 @@ if($_SESSION['level']=="") {
                         <a class="nav-link" href="maps.php">
                             <i class="nc-icon nc-pin-3"></i>
                             <p>Lokasi Konter</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="notifications.php">
-                            <i class="nc-icon nc-bell-55"></i>
-                            <p>Notifications</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="../index.php">
-                            <i class="nc-icon nc-bell-55"></i>
-                            <p>Kembali</p>
                         </a>
                     </li>
                 </ul>

@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>    
     <meta name="description" content="Source Code Sistem Informasi Geografis / Geographic Information System (GIS) berbasis web dengan PHP dan MySQL. Studi kasus: lokasi pura di Bali."/>
     <meta name="keywords" content="Sistem, Informasi, geografis, gis, Tugas Akhir, Skripsi, Jurnal, Source Code, PHP, MySQL, CSS, JavaScript, Bootstrap, jQuery"/>
-    <meta name="author" content="sarjanakomedi.com"/>
     <link rel="icon" href="favicon.ico"/>
-    <link rel="canonical" href="https://sarjanakomedi.com/" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
 
     <title>Sistem Informasi Geografis</title>
     <link href="assets/css/solar-bootstrap.min.css" rel="stylesheet"/>
@@ -16,107 +15,107 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
     <style>
-      	-webkit-box-sizing:border-box;
-	-moz-box-sizing:border-box;
-	-ms-box-sizing:border-box;
-	-o-box-sizing:border-box;
-	box-sizing:border-box;
-	outline:none;
-	margin:0;
-	padding:0;
-}
-.whatsapp-btn {
-	cursor:pointer;
-	position:fixed;
-	bottom:90px;
-	right:90px;
-	display:block;
-	width:90px;
-	height:90px;
-	border-radius:90px;
-	text-indent:-9999px;
-	background:#fff url(https://lh3.googleusercontent.com/-evFtor-f_w8/W4pfajfP17I/AAAAAAAAE9E/f7H52hrT5UoY4ZqdkxSGh2ZftYrH8fiDwCLcBGAs/s300/Whatsapp.png) no-repeat center center;
-	background-size:50% auto;
-	box-shadow:0 20px 25px rgba(0,0,0,.05);
-	transition:.2s;
-}
-.whatsapp-btn:active {
-	bottom:35px;
-}
-#whatsapp {
-	position:fixed;
-	z-index:+100;
-	bottom:0px;
-	right:0px;
-	display:block;
-	background:#fff;
-	box-shadow:0 20px 25px rgba(000);
-	max-width:-webkit-fill-available;
-	font-family:Helvetica, sans-serif;
-	font-size:90%;
-	border-radius:4px;
-	visibility:hidden;
-	opacity:0;
-	transition:.3s;
-}
-#whatsapp.toggle {
-    font-size: 100%;
-    padding: 1px;
-    position: relative;
-    visibility: initial;
-    opacity: unset;
-}
-@media(max-width:320px) {
-	.whatsapp-btn {
-		bottom:10px;
-		right:10px;
-	}
-	#whatsapp.toggle {
-		bottom:80px;
-		right:10px;
-		visibility:visible;
-		opacity:1;
-	}
-}
-#whatsapp label,
-#whatsapp a {
-	display:block;
-	margin:15px;
-	text-decoration:none;
-}
-#whatsapp input,
-#whatsapp textarea {
-	display:block;
-	border:1px solid #21811a;
-	box-shadow:inset 0 2px 5px #ffffff00;
-	width:100%;
-	padding:15px;
-	border-radius:2px;
-}
-#whatsapp input.nama {
-	text-transform:capitalize;
-}
-#whatsapp input:focus,
-#whatsapp textarea:focus {
-	border:1px solid #ddd;
-}
-#whatsapp textarea {
-	min-height:80px;
-	resize: none;
-}
-#whatsapp a {
-	cursor:pointer;
-	display:block;
-	padding:10px;
-	font-weight:bold;
-	text-align:center;
-	background:#25D366;
-	color:white;
-	border-radius:2px;
-}
-#whatsapp a:hover {
-	background:#20b558;
-            }
+      -webkit-box-sizing:border-box;
+      -moz-box-sizing:border-box;
+      -ms-box-sizing:border-box;
+      -o-box-sizing:border-box;
+      box-sizing:border-box;
+      outline:none;
+      margin:0;
+      padding:0;
+    }
+    .whatsapp-btn {
+      cursor:pointer;
+      position:fixed;
+      bottom:90px;
+      right:90px;
+      display:block;
+      width:90px;
+      height:90px;
+      border-radius:90px;
+      text-indent:-9999px;
+      background:#fff url(https://lh3.googleusercontent.com/-evFtor-f_w8/W4pfajfP17I/AAAAAAAAE9E/f7H52hrT5UoY4ZqdkxSGh2ZftYrH8fiDwCLcBGAs/s300/Whatsapp.png) no-repeat center center;
+      background-size:50% auto;
+      box-shadow:0 20px 25px rgba(0,0,0,.05);
+      transition:.2s;
+    }
+    .whatsapp-btn:active {
+      bottom:35px;
+    }
+    #whatsapp {
+      position:fixed;
+      z-index:+100;
+      bottom:0px;
+      right:0px;
+      display:block;
+      background:#fff;
+      box-shadow:0 20px 25px rgba(000);
+      max-width:-webkit-fill-available;
+      font-family:Helvetica, sans-serif;
+      font-size:90%;
+      border-radius:4px;
+      visibility:hidden;
+      opacity:0;
+      transition:.3s;
+    }
+    #whatsapp.toggle {
+        font-size: 100%;
+        padding: 1px;
+        position: relative;
+        visibility: initial;
+        opacity: unset;
+    }
+    @media(max-width:320px) {
+      .whatsapp-btn {
+        bottom:10px;
+        right:10px;
+      }
+      #whatsapp.toggle {
+        bottom:80px;
+        right:10px;
+        visibility:visible;
+        opacity:1;
+      }
+    }
+    #whatsapp label,
+    #whatsapp a {
+      display:block;
+      margin:15px;
+      text-decoration:none;
+    }
+    #whatsapp input,
+    #whatsapp textarea {
+      display:block;
+      border:1px solid #21811a;
+      box-shadow:inset 0 2px 5px #ffffff00;
+      width:100%;
+      padding:15px;
+      border-radius:2px;
+    }
+    #whatsapp input.nama {
+      text-transform:capitalize;
+    }
+    #whatsapp input:focus,
+    #whatsapp textarea:focus {
+      border:1px solid #ddd;
+    }
+    #whatsapp textarea {
+      min-height:80px;
+      resize: none;
+    }
+    #whatsapp a {
+      cursor:pointer;
+      display:block;
+      padding:10px;
+      font-weight:bold;
+      text-align:center;
+      background:#25D366;
+      color:white;
+      border-radius:2px;
+    }
+    #whatsapp a:hover {
+      background:#20b558;
+                }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="assets/js/jquery.min.js"></script>
@@ -141,9 +140,7 @@
                 include "koneksi.php";
                 $id_konter = $_GET['id_konter'];
 
-                $query = "SELECT * FROM konter_servis LEFT JOIN user 
-                ON konter_servis.id_user = user.id_user
-                WHERE id_konter='$id_konter'";
+                $query = "SELECT * FROM konter_servis WHERE id_konter='$id_konter'";
                 $hasil = mysqli_query ($conn, $query);
                 //mysqli_error($id_user);
                 if (!$hasil) die ("Gagal query ...");
@@ -159,6 +156,28 @@
                 "id_konter": '<?php echo $data['id_konter']; ?>'
             }
         ];
+    </script>
+    <script>
+      <?php
+          include "koneksi.php"; 
+      if ($_SERVER["REQUEST_METHOD"] == "POST")
+      {
+        
+          $name = $_POST["nama"];
+          $rating = $_POST["rating"];
+      
+          $sql = "INSERT INTO reting (nama, rate) VALUES ('$name','$rating')";
+          if (mysqli_query($conn, $sql))
+          {
+              alert("terima kasih atas penilaian anda");
+          }
+          else
+          {
+              echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+          }
+          mysqli_close($conn);
+      }
+      ?>
     </script>
   </head>
   <body>
@@ -190,12 +209,37 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <p>Alamat: <?=$data['alamat'];?></p>
+                  <p>Alamat: <?=$data['alamat'];?></p>
                 <div>
-                    <p>Detail: <?=$data['detail_konter'];?></p>
+                  <p>Detail: <?=$data['detail_konter'];?></p>
                 </div>
                 <div>
-                    <p>Fitur Antar Jemput: <?=$data['antar_jemput'];?></p>
+                  <p>Fitur Antar Jemput: <?=$data['antar_jemput'];?></p>
+                </div>
+                <div>    
+                  <form action="tes.php?id_konter=<?php echo $data['id_konter'];?>" method="POST"" method="post">                
+                    <div>
+                      <h3>Silahkan Masukkan Penilaian Anda</h3>
+                    </div>                    
+                    <div>
+                      <label>Nama Anda</label>
+                      <input type="text" name="nama">
+                    </div>                    
+                    <div class="rateyo" id= "rating"
+                                data-rateyo-rating="4"
+                                data-rateyo-num-stars="5"
+                                data-rateyo-score="3">
+                    </div>                    
+                      <span class='result'>0</span>
+                      <input type="hidden" name="rating">
+                    
+                    <div>
+                    <?php
+                      echo "<input type='submit' name='add'> ";
+                    ?>
+                    </div>
+                
+                  </form>
                 </div>                
             </div>
                 <div class="col-md-6">
@@ -217,7 +261,22 @@
       </div>
     </footer>
 </body>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+ 
+<script>
+ 
+ 
+    $(function () {
+        $(".rateyo").rateYo().on("rateyo.change", function (e, data) {
+            var rating = data.rating;
+            $(this).parent().find('.score').text('score :'+ $(this).attr('data-rateyo-score'));
+            $(this).parent().find('.result').text('rating :'+ rating);
+            $(this).parent().find('input[name=rating]').val(rating); //add rating value to input field
+        });
+    });
+ 
+</script>
 <script type="text/javascript">
         window.onload = function () {
             var mapOptions = {
@@ -258,7 +317,7 @@
           <h4 class="modal-title">Silahkan Isi Pesan</h4>
         </div>
         <div id="whatsapp" class="toggle">
-          <input class="tujuan" type="hidden" value="<?=$data['no_tlp'];?>" /> <!-- No. WhatsApp -->
+          <input class="tujuan" type="hidden" value="<?=$data['no_wa'];?>" /> <!-- No. WhatsApp -->
 
           <label>Nama :
             <input class="nama" type="text" placeholder="Tulis Nama Lengkap." />

@@ -24,10 +24,6 @@ if (isset($_POST['login'])){
 		{
 			echo "<script>alert('Welcome To Pemilik !');document.location.href='../pemilik/dashboard.php'</script>/n";
 		} 
-		elseif($row['level'] == "pengunjung")
-		{
-			echo "<script>alert('Welcome To Pengunjung !');document.location.href='../pengunjung/index.php'</script>/n";
-		}
 		else
 		{
 			echo "<script>alert('Login Gagal !!!');document.location.href='../login/login.php'</script>/n";
