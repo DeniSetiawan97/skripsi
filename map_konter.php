@@ -7,7 +7,6 @@
     <meta name="description" content="Source Code Sistem Informasi Geografis / Geographic Information System (GIS) berbasis web dengan PHP dan MySQL. Studi kasus: lokasi pura di Bali."/>
     <meta name="keywords" content="Sistem, Informasi, geografis, gis, Tugas Akhir, Skripsi, Jurnal, Source Code, PHP, MySQL, CSS, JavaScript, Bootstrap, jQuery"/>
     <link rel="icon" href="favicon.ico"/>
-    <link rel="canonical" href="https://sarjanakomedi.com/" />
 
     <title>Sistem Informasi Geografis</title>
     <link href="assets/css/solar-bootstrap.min.css" rel="stylesheet"/>

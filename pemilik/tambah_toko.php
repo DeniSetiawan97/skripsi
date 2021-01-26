@@ -37,7 +37,12 @@ if($_SESSION['level']=="") {
     <link href="assets/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="assets/css/demo.css" rel="stylesheet" />
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2t66MDpj3mi7QnqPODUOb25VtT6VnOaA&callback=initialize" async defer></script>
+    
     <style>
         .comment {
             float: left;
@@ -133,7 +138,7 @@ if($_SESSION['level']=="") {
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">Tambah Toko</h4>
@@ -198,14 +203,36 @@ if($_SESSION['level']=="") {
                                         </div>
                                         <button type="submit" name="submit" class="btn btn-info btn-fill pull-right">Tambah Toko</button>
                                         
-                                            <a class="btn btn-danger" href="toko.php">Kembali</a><span class="glyphicon glyphicon-arrow-left"></span>
+                                            <a class="btn btn-primary" href="toko.php">Kembali</a>
                                         
                                     </form>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div id="map" style="height: 400px;"></div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-11">
+                                    <!-- Form pencarian -->
+                                    <form class="form-horizontal" id="formCariTempat" method="POST" autocomplete="off">
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3" >Cari Tempat:</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="tempat" name="tempat">
+                                                </div>
+                                        </div>          
+                                        <div class="form-group"> 
+                                            <div class="col-sm-offset-3 col-sm-9">
+                                                <button type="submit" class="btn btn-default">Cari</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- tempat meletakan keterangan alamat dan lat, lng -->
+                                    <div id="panelContent"></div>
+                                    <div class="col-md-7">
+                                    <div id="map" style="height: 300px; width: 400px;"></div>
+                                    <div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -247,85 +274,65 @@ if($_SESSION['level']=="") {
             </footer>
         </div>
     </div>
-    <!--   -->
-    <!-- <div class="fixed-plugin">
-    <div class="dropdown show-dropdown">
-        <a href="#" data-toggle="dropdown">
-            <i class="fa fa-cog fa-2x"> </i>
-        </a>
 
-        <ul class="dropdown-menu">
-			<li class="header-title"> Sidebar Style</li>
-            <li class="adjustments-line">
-                <a href="javascript:void(0)" class="switch-trigger">
-                    <p>Background Image</p>
-                    <label class="switch">
-                        <input type="checkbox" data-toggle="switch" checked="" data-on-color="primary" data-off-color="primary"><span class="toggle"></span>
-                    </label>
-                    <div class="clearfix"></div>
-                </a>
-            </li>
-            <li class="adjustments-line">
-                <a href="javascript:void(0)" class="switch-trigger background-color">
-                    <p>Filters</p>
-                    <div class="pull-right">
-                        <span class="badge filter badge-black" data-color="black"></span>
-                        <span class="badge filter badge-azure" data-color="azure"></span>
-                        <span class="badge filter badge-green" data-color="green"></span>
-                        <span class="badge filter badge-orange" data-color="orange"></span>
-                        <span class="badge filter badge-red" data-color="red"></span>
-                        <span class="badge filter badge-purple active" data-color="purple"></span>
-                    </div>
-                    <div class="clearfix"></div>
-                </a>
-            </li>
-            <li class="header-title">Sidebar Images</li>
+<script type="text/javascript">
+  $(document).ready(function() { 
+    $("#formCariTempat").submit(function(e) {
+        e.preventDefault();
+        //ambil value dari form
+        var namatempat=$("#tempat").val();
 
-            <li class="active">
-                <a class="img-holder switch-trigger" href="javascript:void(0)">
-                    <img src="../assets/img/sidebar-1.jpg" alt="" />
-                </a>
-            </li>
-            <li>
-                <a class="img-holder switch-trigger" href="javascript:void(0)">
-                    <img src="../assets/img/sidebar-3.jpg" alt="" />
-                </a>
-            </li>
-            <li>
-                <a class="img-holder switch-trigger" href="javascript:void(0)">
-                    <img src="..//assets/img/sidebar-4.jpg" alt="" />
-                </a>
-            </li>
-            <li>
-                <a class="img-holder switch-trigger" href="javascript:void(0)">
-                    <img src="../assets/img/sidebar-5.jpg" alt="" />
-                </a>
-            </li>
+        if (namatempat!="") {
+           //replace semua spasi menjadi tanda plus (+)
+            namatempat=namatempat.replace(/ /g, "+");
+           //api google maps
+            var url="https://maps.googleapis.com/maps/api/geocode/json?address="+namatempat+"&key=AIzaSyD2t66MDpj3mi7QnqPODUOb25VtT6VnOaA";
 
-            <li class="button-container">
-                <div class="">
-                    <a href="http://www.creative-tim.com/product/light-bootstrap-dashboard" target="_blank" class="btn btn-info btn-block btn-fill">Download, it's free!</a>
-                </div>
-            </li>
+            document.getElementById("panelContent").innerHTML="";
 
-            <li class="header-title pro-title text-center">Want more components?</li>
+            //ambil data dari json
+            $.getJSON(url, function(result){ 
 
-            <li class="button-container">
-                <div class="">
-                    <a href="http://www.creative-tim.com/product/light-bootstrap-dashboard-pro" target="_blank" class="btn btn-warning btn-block btn-fill">Get The PRO Version!</a>
-                </div>
-            </li>
+                //menampilkan peta
+                var map;          
+                var infowindow = new google.maps.InfoWindow({ });   
+                map = new google.maps.Map(document.getElementById('map'), {                
+                  zoom: 15,  
+                  center: {lat: result.results[0].geometry.location.lat, lng: result.results[0].geometry.location.lng},              
+                });
+                
+                //looping data json
+                $.each(result.results, function(i){  
+                //menampilkan data keterangan alamat, lat, long                  
+                document.getElementById("panelContent").innerHTML +="<b>Alamat :</b>"+ result.results[i].formatted_address + "<br><b>Lat :</b>"+ result.results[i].geometry.location.lat + "<br><b>Long :</b>"+ result.results[i].geometry.location.lng + "<br><br>";
 
-            <li class="header-title" id="sharrreTitle">Thank you for sharing!</li>
+                 //set marker
+                 var marker = new google.maps.Marker({
+                    position: {lat: result.results[i].geometry.location.lat, lng: result.results[i].geometry.location.lng},
+                    title:result.results[i].formatted_address
+                });
 
-            <li class="button-container">
-				<button id="twitter" class="btn btn-social btn-outline btn-twitter btn-round sharrre"><i class="fa fa-twitter"></i> · 256</button>
-                <button id="facebook" class="btn btn-social btn-outline btn-facebook btn-round sharrre"><i class="fa fa-facebook-square"></i> · 426</button>
-            </li>
-        </ul>
-    </div>
-</div>
- -->
+                //menampilkan popup keterangan di saat marker di click
+                google.maps.event.addListener(marker, 'click', function () {
+                        infowindow.setContent(result.results[i].formatted_address);
+                        infowindow.open(map, marker);
+                });
+                 // To add the marker to the map, call setMap();
+                marker.setMap(map);
+
+               });
+
+             });   
+
+        }else{
+          alert("Nama tempat tidak boleh kosong!");
+        } 
+       
+    });
+});
+   
+</script>
+
 </body>
 <!--   Core JS Files   -->
 <script src="assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
@@ -382,5 +389,7 @@ $(function(){
     initMap();
 })
 </script>
+
+
 
 </html>
