@@ -121,16 +121,7 @@ if($_SESSION['level']=="") {
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#pablo"> Tambah Toko </a>
-                    <div class="collapse navbar-collapse justify-content-end" id="navigation">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="logout.php">
-                                    <span class="no-icon">Log out</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                    <p> Tambah Toko </p>                    
                 </div>
             </nav>
             <!-- End Navbar -->
@@ -202,8 +193,7 @@ if($_SESSION['level']=="") {
                                             </div>  
                                         </div>
                                         <button type="submit" name="submit" class="btn btn-info btn-fill pull-right">Tambah Toko</button>
-                                        
-                                            <a class="btn btn-primary" href="toko.php">Kembali</a>
+                                        <a class="btn btn-primary" href="toko.php">Kembali</a>
                                         
                                     </form>
                                 </div>

@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<?php 
+  include 'koneksi.php'; 
+?><!DOCTYPE html>
 <html lang="id">
   <head>
     <meta charset="utf-8"/>
@@ -27,6 +29,7 @@
             menubar : false,
             toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
         });
+    </script>
     <script src="assets/js/script.js"></script>
   </head>
   <body>
@@ -68,38 +71,64 @@
                             <th>Aksi</th>                
                         </tr>
                     </thead>
-                    <?php
-                        include "koneksi.php";
+                    <tbody>
+                        <?php 
+                        $batas = 5;
+                        $halaman = isset($_GET['halaman'])?(int)$_GET['halaman'] : 1;
+                        $halaman_awal = ($halaman>1) ? ($halaman * $batas) - $batas : 0;	
+                
+                        $previous = $halaman - 1;
+                        $next = $halaman + 1;
+                        
+                        $data = mysqli_query($conn,"select * from konter_servis");
+                        $jumlah_data = mysqli_num_rows($data);
+                        $total_halaman = ceil($jumlah_data / $batas);
+                
+                        $data_konter = mysqli_query($conn,"select * from konter_servis limit $halaman_awal, $batas");
+                        $nomor = $halaman_awal+1;
+                        while($d = mysqli_fetch_array($data_konter)){
+                          ?>
+                          <tr>
+                          <?php
                             
-                        $query = "SELECT * FROM konter_servis";
-                        $hasil	= mysqli_query($conn, $query);
-                        if (!$hasil){
-                            die("Gagal AMbil Data...");
-                        }
-                    ?>
-
-                    <tr>
-                        <?php
-                            $no = 0;
-                            while($data = mysqli_fetch_array($hasil)) {
-                            $no++;
-                            echo "<td>$no</td>";
-                            echo "<td>".$data['nama_konter']."</td>"
-                                ."<td>".$data['antar_jemput']."</td>"
-                                ."<td>".$data['alamat']."</td>"
+                            echo "<td>".$nomor++."</td>";
+                            echo "<td>".$d['nama_konter']."</td>"
+                                ."<td>".$d['antar_jemput']."</td>"
+                                ."<td>".$d['alamat']."</td>"
                                 ."<td>
-                                  <a href='detail_konter.php?id_konter=".$data['id_konter']."' class='btn btn-success'>Lihat detail</a>
+                                  <a href='detail_konter.php?id_konter=".$d['id_konter']."' class='btn btn-success'>Lihat detail</a>
                                 </td>";
                             echo "</tr>";
-                            }
+                            
+                          ?>
+                          </tr>
+                          <?php
+                        }
                         ?>
-                    </tr>
+                      </tbody>
                 </table>
             </div>
         </div>
+        <nav>
+          <ul class="pagination justify-content-center">
+            <li class="page-item">
+              <a class="page-link" <?php if($halaman > 1){ echo "href='?halaman=$previous'"; } ?>>Previous</a>
+            </li>
+            <?php 
+            for($x=1;$x<=$total_halaman;$x++){
+              ?> 
+              <li class="page-item"><a class="page-link" href="?halaman=<?php echo $x ?>"><?php echo $x; ?></a></li>
+              <?php
+            }
+            ?>				
+            <li class="page-item">
+              <a  class="page-link" <?php if($halaman < $total_halaman) { echo "href='?halaman=$next'"; } ?>>Next</a>
+            </li>
+          </ul>
+        </nav>
     </div>
 
-    
+
     <footer class="footer bg-primary">
       <div class="container">
         <p>Copyright &copy; <?=date('Y')?> Deni Setiawan <em class="pull-right">7 Desember 2020</em></p>

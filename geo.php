@@ -1,29 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Demo Cek Lokasi Geolocation HTML5</title>
+	<title>Belajar Ambil Lokasi</title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
- 
 <body>
-<center>
-<p>Cek lokasi anda! >> <button onclick="getLocation()">Cek</button></p>
- 
- 
-<p id="tampilkan"></p>
-</center>
-<script>
-var view = document.getElementById("tampilkan");
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        view.innerHTML = "Yah browsernya ngga support Geolocation bro!";
-    }
-}
- function showPosition(position) {
-    view.innerHTML = "Latitude: " + position.coords.latitude + 
-    "<br>Longitude: " + position.coords.longitude; 
- }
+
+<p>lokasi anda saat ini: <span id="lokasi"></span></p>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		navigator.geolocation.getCurrentPosition(function (position) {
+   			 tampilLokasi(position);
+		}, function (e) {
+		    alert('Geolocation Tidak Mendukung Pada Browser Anda');
+		}, {
+		    enableHighAccuracy: true
+		});
+	});
+
+	function tampilLokasi(posisi) {
+		//console.log(posisi);
+		var latitude 	= posisi.coords.latitude;
+		var longitude 	= posisi.coords.longitude;
+		$.ajax({
+			type 	: 'POST',
+			url		: 'lokasi.php',
+			data 	: 'latitude='+latitude+'&longitude='+longitude,
+			success	: function (e) {
+				if (e) {
+					$('#lokasi').html(e);
+				}else{
+					$('#lokasi').html('Tidak Tersedia');
+				}
+			}
+		})
+	}
 </script>
 </body>
 </html>

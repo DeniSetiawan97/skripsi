@@ -41,13 +41,14 @@
                     <input type="text" class="form-control" id="end" placeholder="Lokasi Anda" required>
                 </div>
                 <p>
-                    <button type="submit" class="btn btn-light" id="pesan-btn">CARI</button>                    
+                    <a class="btn btn-primary" href="../detail_konter.php?id_konter=<?=$_GET['id_konter']?>">Kembali</a>
+                    <button type="submit" class="btn btn-secondary btn-fill pull-right">CARI</button>                    
                 </p>
             </form>
 
             <div id="detail">
                 <hr />
-                <h4>Detail Pesanan</h4>
+                <h4>Detail Rute</h4>
                 <div class="card-custom">
                     <table>
                         <tr>
@@ -61,7 +62,7 @@
                             <td id="duration"></td>
                         </tr>
                         <tr>
-                            <th>Harga</th>
+                            <th>Tarif Antar Jemput Hp </th>
                             <th>:</th>
                             <td id="price"></td>
                         </tr>

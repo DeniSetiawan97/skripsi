@@ -157,28 +157,6 @@
             }
         ];
     </script>
-    <script>
-      <?php
-          include "koneksi.php"; 
-      if ($_SERVER["REQUEST_METHOD"] == "POST")
-      {
-        
-          $name = $_POST["nama"];
-          $rating = $_POST["rating"];
-      
-          $sql = "INSERT INTO reting (nama, rate) VALUES ('$name','$rating')";
-          if (mysqli_query($conn, $sql))
-          {
-              alert("terima kasih atas penilaian anda");
-          }
-          else
-          {
-              echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-          }
-          mysqli_close($conn);
-      }
-      ?>
-    </script>
   </head>
   <body>
     <nav class="navbar navbar-default navbar-static-top">
