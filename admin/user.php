@@ -1,4 +1,6 @@
 <?php
+include '../koneksi.php'; 
+
 session_start();
 if($_SESSION['level']=="") {
     header("Location: ../login/login.php");
@@ -97,16 +99,6 @@ if($_SESSION['level']=="") {
             </nav>
             <!-- End Navbar -->
 
-            <?php
-                include "../koneksi.php";
-                
-                $query = "SELECT * FROM user WHERE level='pemilik' order by nama asc";
-                $hasil	= mysqli_query($conn, $query);
-                if (!$hasil){
-                    die("Gagal AMbil Data...");
-                }
-            ?>
-
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
@@ -128,20 +120,34 @@ if($_SESSION['level']=="") {
                                             <th>Aksi</th>
                                         </thead>
                                         <tbody>
+                                        <?php 
+                                            $batas = 10;
+                                            $halaman = isset($_GET['halaman'])?(int)$_GET['halaman'] : 1;
+                                            $halaman_awal = ($halaman>1) ? ($halaman * $batas) - $batas : 0;	
+                                    
+                                            $previous = $halaman - 1;
+                                            $next = $halaman + 1;
+                                            
+                                            $data = mysqli_query($conn,"SELECT * FROM user WHERE level='pemilik' order by nama asc");
+                                            $jumlah_data = mysqli_num_rows($data);
+                                            $total_halaman = ceil($jumlah_data / $batas);
+                                    
+                                            $data_konter = mysqli_query($conn,"select * from user WHERE level='pemilik' limit $halaman_awal, $batas");
+                                            $nomor = $halaman_awal+1;
+                                            while($d = mysqli_fetch_array($data_konter)){
+                                        ?>
                                             <tr>
                                             <?php
-                                                $no = 0;
-                                                while($data = mysqli_fetch_array($hasil)) {
-                                                    $no++;
-                                                    echo "<td>$no</td>";
-                                                    echo "<td>".$data['nama']."</td>"
-                                                        ."<td>".$data['username']."</td>"
-                                                        ."<td>".$data['no_tlp']."</td>"
-                                                        ."<td>".$data['email']."</td>"
-                                                        ."<td>".$data['level']."</td>"
+                                                
+                                                    echo "<td>".$nomor++."</td>";
+                                                    echo "<td>".$d['nama']."</td>"
+                                                        ."<td>".$d['username']."</td>"
+                                                        ."<td>".$d['no_tlp']."</td>"
+                                                        ."<td>".$d['email']."</td>"
+                                                        ."<td>".$d['level']."</td>"
                                                         ."<td>
-                                                            <a href='hapus.php?id_user=".$data['id_user']."' class='btn btn-xs btn-danger'>Hapus</a>
-                                                            <a href='det_toko.php?id_user=".$data['id_user']."' class='btn btn-xs btn-primar'>Toko</a>
+                                                            <a href='hapus.php?id_user=".$d['id_user']."' class='btn btn-xs btn-danger'>Hapus</a>
+                                                            <a href='det_toko.php?id_user=".$d['id_user']."' class='btn btn-xs btn-primar'>Toko</a>
                                                         </td>";
                                                     echo "</tr>";
                                                 }
@@ -155,6 +161,23 @@ if($_SESSION['level']=="") {
                     </div>
                 </div>
             </div>
+            <nav>
+                <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                    <a class="page-link" <?php if($halaman > 1){ echo "href='?halaman=$previous'"; } ?>>Previous</a>
+                    </li>
+                    <?php 
+                    for($x=1;$x<=$total_halaman;$x++){
+                    ?> 
+                    <li class="page-item"><a class="page-link" href="?halaman=<?php echo $x ?>"><?php echo $x; ?></a></li>
+                    <?php
+                    }
+                    ?>				
+                    <li class="page-item">
+                    <a  class="page-link" <?php if($halaman < $total_halaman) { echo "href='?halaman=$next'"; } ?>>Next</a>
+                    </li>
+                </ul>
+            </nav>
             <footer class="footer">
                 <div class="container-fluid">
                     <nav>

@@ -1,6 +1,7 @@
 <?php 
   include 'koneksi.php'; 
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="id">
   <head>
     <meta charset="utf-8"/>
@@ -73,21 +74,21 @@
                     </thead>
                     <tbody>
                         <?php 
-                        $batas = 5;
-                        $halaman = isset($_GET['halaman'])?(int)$_GET['halaman'] : 1;
-                        $halaman_awal = ($halaman>1) ? ($halaman * $batas) - $batas : 0;	
-                
-                        $previous = $halaman - 1;
-                        $next = $halaman + 1;
-                        
-                        $data = mysqli_query($conn,"select * from konter_servis");
-                        $jumlah_data = mysqli_num_rows($data);
-                        $total_halaman = ceil($jumlah_data / $batas);
-                
-                        $data_konter = mysqli_query($conn,"select * from konter_servis limit $halaman_awal, $batas");
-                        $nomor = $halaman_awal+1;
-                        while($d = mysqli_fetch_array($data_konter)){
-                          ?>
+                          $batas = 10;
+                          $halaman = isset($_GET['halaman'])?(int)$_GET['halaman'] : 1;
+                          $halaman_awal = ($halaman>1) ? ($halaman * $batas) - $batas : 0;	
+                  
+                          $previous = $halaman - 1;
+                          $next = $halaman + 1;
+                          
+                          $data = mysqli_query($conn,"select * from konter_servis");
+                          $jumlah_data = mysqli_num_rows($data);
+                          $total_halaman = ceil($jumlah_data / $batas);
+                  
+                          $data_konter = mysqli_query($conn,"select * from konter_servis limit $halaman_awal, $batas");
+                          $nomor = $halaman_awal+1;
+                          while($d = mysqli_fetch_array($data_konter)){
+                        ?>
                           <tr>
                           <?php
                             
