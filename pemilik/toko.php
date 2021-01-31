@@ -157,7 +157,6 @@ if($_SESSION['level']=="") {
                                                         ."<td>                                                            
                                                             <a href='edit_toko.php?id_konter=".$d['id_konter']."' class='btn btn-primary btn-fill btn-sm'>Edit</a>
                                                             <a href='php/hapus_toko.php?id_konter=".$d['id_konter']."' class='btn btn-danger btn-fill btn-sm'>Hapus</a></br>
-                                                            <div><a href='#' name='age' id='age' data-toggle='modal' data-target='#add_data_Modal' class='btn btn-primary btn-sm'><span class='glyphicon glyphicon-envelope'></span> Kirim Pesan</a></div>
                                                         </td>";
                                                     echo "</tr>";
                                                 }
