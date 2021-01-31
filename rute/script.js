@@ -1,7 +1,7 @@
 var map;
 var directionsService = new google.maps.DirectionsService();
 var directionsDisplay = new google.maps.DirectionsRenderer();
-var harga = 5.7;
+var harga = 5;
 
 map = new google.maps.Map(document.getElementById('map'), {
     center: {

@@ -9,15 +9,11 @@ if($_SESSION['level']=="") {
 =========================================================
  Light Bootstrap Dashboard - v2.0.1
 =========================================================
-
  Product Page: https://www.creative-tim.com/product/light-bootstrap-dashboard
  Copyright 2019 Creative Tim (https://www.creative-tim.com)
  Licensed under MIT (https://github.com/creativetimofficial/light-bootstrap-dashboard/blob/master/LICENSE)
-
  Coded by Creative Tim
-
 =========================================================
-
  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.  -->
 <!DOCTYPE html>
 <html lang="en">
@@ -44,7 +40,6 @@ if($_SESSION['level']=="") {
         <div class="sidebar" data-image="assets/img/sidebar-5.jpg">
             <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
-
         Tip 2: you can also add an image using data-image tag
     -->
             <div class="sidebar-wrapper">
@@ -202,7 +197,6 @@ if($_SESSION['level']=="") {
         <a href="#" data-toggle="dropdown">
             <i class="fa fa-cog fa-2x"> </i>
         </a>
-
         <ul class="dropdown-menu">
 			<li class="header-title"> Sidebar Style</li>
             <li class="adjustments-line">
@@ -229,7 +223,6 @@ if($_SESSION['level']=="") {
                 </a>
             </li>
             <li class="header-title">Sidebar Images</li>
-
             <li class="active">
                 <a class="img-holder switch-trigger" href="javascript:void(0)">
                     <img src="../assets/img/sidebar-1.jpg" alt="" />
@@ -250,23 +243,18 @@ if($_SESSION['level']=="") {
                     <img src="../assets/img/sidebar-5.jpg" alt="" />
                 </a>
             </li>
-
             <li class="button-container">
                 <div class="">
                     <a href="http://www.creative-tim.com/product/light-bootstrap-dashboard" target="_blank" class="btn btn-info btn-block btn-fill">Download, it's free!</a>
                 </div>
             </li>
-
             <li class="header-title pro-title text-center">Want more components?</li>
-
             <li class="button-container">
                 <div class="">
                     <a href="http://www.creative-tim.com/product/light-bootstrap-dashboard-pro" target="_blank" class="btn btn-warning btn-block btn-fill">Get The PRO Version!</a>
                 </div>
             </li>
-
             <li class="header-title" id="sharrreTitle">Thank you for sharing!</li>
-
             <li class="button-container">
 				<button id="twitter" class="btn btn-social btn-outline btn-twitter btn-round sharrre"><i class="fa fa-twitter"></i> · 256</button>
                 <button id="facebook" class="btn btn-social btn-outline btn-facebook btn-round sharrre"><i class="fa fa-facebook-square"></i> · 426</button>

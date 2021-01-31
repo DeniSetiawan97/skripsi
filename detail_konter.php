@@ -12,6 +12,7 @@
     <title>Sistem Informasi Geografis</title>
     <link href="assets/css/solar-bootstrap.min.css" rel="stylesheet"/>
     <link href="assets/css/general.css" rel="stylesheet"/> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
     <style>
@@ -115,7 +116,23 @@
     }
     #whatsapp a:hover {
       background:#20b558;
-                }
+    }
+    #star {
+      float: left;
+      padding-right: 20px;
+    }
+
+    #star span {
+      padding: 3px;
+      font-size: 20px;
+    }
+    .on {
+      color: #f7d106
+    }
+
+    .off {
+      color: #ddd;
+    }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="assets/js/jquery.min.js"></script>
@@ -140,7 +157,9 @@
                 include "koneksi.php";
                 $id_konter = $_GET['id_konter'];
 
-                $query = "SELECT * FROM konter_servis WHERE id_konter='$id_konter'";
+                $query = "SELECT * FROM reting RIGHT JOIN konter_servis
+                on reting.id_konter=konter_servis.id_konter
+                where konter_servis.id_konter='$id_konter'";
                 $hasil = mysqli_query ($conn, $query);
                 //mysqli_error($id_user);
                 if (!$hasil) die ("Gagal query ...");
@@ -193,6 +212,17 @@
                 </div>
                 <div>
                   <p>Fitur Antar Jemput: <?=$data['antar_jemput'];?></p>
+                </div>
+                <?php 
+                  $q      = $conn->query("SELECT AVG(rate) AS jml FROM reting WHERE id_konter='$id_konter'")->fetch_assoc();
+                  $hasil  = ceil($q['jml']); 
+                ?>                
+                <div class="rateyo" id= "rating"
+                            data-rateyo-rating="<?php echo $hasil; ?>">
+                </div>  
+
+                <div id="hasil">
+                    Rating <?php echo $hasil; ?>
                 </div>
                 <div>    
                 <?php

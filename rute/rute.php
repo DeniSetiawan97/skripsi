@@ -2,18 +2,17 @@
 <html>
 
 <head>
-    <title>CARI ALAMAT</title>
+    <title>CARI RUTE ANDA</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     
 </head>
 
 <body>
 
-<?php
+            <?php
                 include "../koneksi.php";
                 $id_konter = $_GET['id_konter'];
 
@@ -41,7 +40,7 @@
                     <input type="text" class="form-control" id="end" placeholder="Lokasi Anda" required>
                 </div>
                 <p>
-                    <a class="btn btn-primary" href="../detail_konter.php?id_konter=<?=$_GET['id_konter']?>">Kembali</a>
+                    <input type="button" class="btn btn-primary" value="KEMBALI" onclick="history.back(-1)" />
                     <button type="submit" class="btn btn-secondary btn-fill pull-right">CARI</button>                    
                 </p>
             </form>

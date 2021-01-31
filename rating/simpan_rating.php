@@ -15,7 +15,7 @@
             $query = mysqli_query($conn, "INSERT INTO reting VALUES
             (NULL,'$id','$ulasan','$rating')");
 
-            echo "<script>alert('Data Berhasil Ditambah !');document.location.href='../index.php'</script>/n";
+            echo "<script>alert('Terima Kasih !');document.location.href='../index.php'</script>/n";
               
           } 
     

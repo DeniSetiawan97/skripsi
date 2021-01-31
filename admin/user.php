@@ -132,9 +132,9 @@ if($_SESSION['level']=="") {
                                             $jumlah_data = mysqli_num_rows($data);
                                             $total_halaman = ceil($jumlah_data / $batas);
                                     
-                                            $data_konter = mysqli_query($conn,"select * from user WHERE level='pemilik' limit $halaman_awal, $batas");
+                                            $data_user = mysqli_query($conn,"select * from user WHERE level='pemilik' limit $halaman_awal, $batas");
                                             $nomor = $halaman_awal+1;
-                                            while($d = mysqli_fetch_array($data_konter)){
+                                            while($d = mysqli_fetch_array($data_user)){
                                         ?>
                                             <tr>
                                             <?php
@@ -146,8 +146,8 @@ if($_SESSION['level']=="") {
                                                         ."<td>".$d['email']."</td>"
                                                         ."<td>".$d['level']."</td>"
                                                         ."<td>
-                                                            <a href='hapus.php?id_user=".$d['id_user']."' class='btn btn-xs btn-danger'>Hapus</a>
-                                                            <a href='det_toko.php?id_user=".$d['id_user']."' class='btn btn-xs btn-primar'>Toko</a>
+                                                            <a href='hapus.php?id_user=".$d['id_user']."' class='btn btn-danger btn-fill btn-sm'>Hapus</a>
+                                                            <a href='det_toko.php?id_user=".$d['id_user']."' class='btn btn-primary btn-fill btn-sm'>Toko</a>
                                                         </td>";
                                                     echo "</tr>";
                                                 }
