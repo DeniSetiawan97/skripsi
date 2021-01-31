@@ -215,7 +215,7 @@
                 </div>
                 <?php 
                   $q      = $conn->query("SELECT AVG(rate) AS jml FROM reting WHERE id_konter='$id_konter'")->fetch_assoc();
-                  $hasil  = ceil($q['jml']); 
+                  $hasil  = round($q['jml'],1); 
                 ?>                
                 <div class="rateyo" id= "rating"
                             data-rateyo-rating="<?php echo $hasil; ?>">

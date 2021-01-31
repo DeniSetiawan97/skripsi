@@ -41,7 +41,7 @@
                 </div>
                 <p>
                     <input type="button" class="btn btn-primary" value="KEMBALI" onclick="history.back(-1)" />
-                    <button type="submit" class="btn btn-secondary btn-fill pull-right">CARI</button>                    
+                    <button type="submit" class="btn btn-secondary btn-fill pull-right">CARI</button>                  
                 </p>
             </form>
 

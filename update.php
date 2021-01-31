@@ -1,41 +1,50 @@
+<?php
+include "koneksi.php";
+$produk = mysqli_query($conn,"select * from konter_servis");
+while($row = mysqli_fetch_array($produk)){
+	$nama_konter[] = $row['nama_konter'];
+	
+	$query = mysqli_query($conn,"SELECT AVG(rate) AS jumlah FROM reting WHERE id_konter='".$row['id_konter']."'");
+	$row = $query->fetch_array();
+	$jumlah_produk[] = $row['jumlah'];
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Belajar Ambil Lokasi</title>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<title>Membuat Grafik Menggunakan Chart JS</title>
+	<script type="text/javascript" src="Chart.js"></script>
 </head>
 <body>
+	<div style="width: 800px;height: 800px">
+		<canvas id="myChart"></canvas>
+	</div>
 
-<p>lokasi anda saat ini: <span id="lokasi"></span></p>
 
-<script type="text/javascript">
-	$(document).ready(function() {
-		navigator.geolocation.getCurrentPosition(function (position) {
-   			 tampilLokasi(position);
-		}, function (e) {
-		    alert('Geolocation Tidak Mendukung Pada Browser Anda');
-		}, {
-		    enableHighAccuracy: true
-		});
-	});
-
-	function tampilLokasi(posisi) {
-		//console.log(posisi);
-		var latitude 	= posisi.coords.latitude;
-		var longitude 	= posisi.coords.longitude;
-		$.ajax({
-			type 	: 'POST',
-			url		: 'index.php',
-			data 	: 'latitude='+latitude+'&longitude='+longitude,
-			success	: function (e) {
-				if (e) {
-					$('#lokasi').html(e);
-				}else{
-					$('#lokasi').html('Tidak Tersedia');
+	<script>
+		var ctx = document.getElementById("myChart").getContext('2d');
+		var myChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: <?php echo json_encode($nama_konter); ?>,
+				datasets: [{
+					label: 'Grafik Penjualan',
+					data: <?php echo json_encode($jumlah_produk); ?>,
+					backgroundColor: 'rgba(255, 99, 132, 0.2)',
+					borderColor: 'rgba(255,99,132,1)',
+					borderWidth: 1
+				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero:true
+						}
+					}]
 				}
 			}
-		})
-	}
-</script>
+		});
+	</script>
 </body>
 </html>

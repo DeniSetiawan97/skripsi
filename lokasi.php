@@ -1,49 +1,63 @@
 <?php
-include 'koneksi.php';
+include "koneksi.php";
+$produk = mysqli_query($conn,"select * from konter_servis");
+while($row = mysqli_fetch_array($produk)){
+	$nama_konter[] = $row['nama_konter'];
+	
+	$query = mysqli_query($conn,"SELECT AVG(rate) AS jumlah FROM reting WHERE id_konter='".$row['id_konter']."'");
+	$row = $query->fetch_array();
+	$jumlah_produk[] = round($row['jumlah'],1);
+}
 ?>
-
-<table border="1">
-  <tr>
-  	<th>No</th>
-    <th>Nama Konter</th>
-    <th>Layanan Antar Jemput</th>
-    <th>Alamat</th>                         
-  </tr>
-  <?php 
-  $batas = 5;
-  $halaman = isset($_GET['halaman'])?(int)$_GET['halaman'] : 1;
-  $halaman_awal = ($halaman>1) ? ($halaman * $batas) - $batas : 0;	
-
-  $previous = $halaman - 1;
-  $next = $halaman + 1;
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Membuat Grafik Menggunakan Chart JS</title>
   
-  $data = mysqli_query($conn,"select * from konter_servis");
-  $jumlah_data = mysqli_num_rows($data);
-  $total_halaman = ceil($jumlah_data / $batas);
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+</head>
+<body>
+	<div style="width: 800px;height: 800px">
+		<canvas id="myChart"></canvas>
+	</div>
 
-  $data_konter = mysqli_query($conn,"select * from konter_servis limit $halaman_awal, $batas");
-  $nomor = $halaman_awal+1;
-  while($d = mysqli_fetch_array($data_konter)){
-    ?>
-    <tr>
-      <td><?php echo $nomor++; ?></td>                  
-	  <td><?php echo $d['nama_konter']; ?></td>
-	  <td><?php echo $d['antar_jemput']; ?></td>
-	  <td><?php echo $d['alamat']; ?></td>              
-                  
-    </tr>
 
-    <?php               
-  } 
-  ?>
-  
+	<script>
+		var ctx = document.getElementById("myChart").getContext('2d');
+		var myChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: <?php echo json_encode($nama_konter); ?>,
+				datasets: [{
+					label: 'Grafik Penjualan',
+					data: <?php echo json_encode($jumlah_produk); ?>,
+					backgroundColor: 'rgba(255, 99, 132, 0.2)',
+					borderColor: 'rgba(255,99,132,1)',
+					borderWidth: 1
+				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero:true
+						}
+					}]
+				}
+			}
+		});
+	</script>
+</body>
+</html>
 
-</table>          
+<?php
 
-<div class="">
-  <?php for ($i=1; $i<=$halaman ; $i++){ ?>
-  <a href="?batas=<?php echo $i; ?>"><?php echo $i; ?></a>
+$nilai=3.7143;
 
-  <?php } ?>
+$hasil=round($nilai,1);
 
-</div>
+echo"$nilai<br>";
+
+echo"$hasil";
+
+?>

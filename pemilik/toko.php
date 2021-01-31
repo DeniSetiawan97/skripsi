@@ -156,7 +156,8 @@ if($_SESSION['level']=="") {
                                                         ."<td>".$d['longitude']."</td>"
                                                         ."<td>                                                            
                                                             <a href='edit_toko.php?id_konter=".$d['id_konter']."' class='btn btn-primary btn-fill btn-sm'>Edit</a>
-                                                            <a href='php/hapus_toko.php?id_konter=".$d['id_konter']."' class='btn btn-danger btn-fill btn-sm'>Hapus</a>
+                                                            <a href='php/hapus_toko.php?id_konter=".$d['id_konter']."' class='btn btn-danger btn-fill btn-sm'>Hapus</a></br>
+                                                            <div><a href='#' name='age' id='age' data-toggle='modal' data-target='#add_data_Modal' class='btn btn-primary btn-sm'><span class='glyphicon glyphicon-envelope'></span> Kirim Pesan</a></div>
                                                         </td>";
                                                     echo "</tr>";
                                                 }
@@ -244,3 +245,19 @@ if($_SESSION['level']=="") {
 <script src="assets/js/demo.js"></script>
 
 </html>
+<div>  
+  <div id="add_data_Modal" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Silahkan Isi Pesan Anda (Pastikan Sudah Masuk Ke WhatsApp Web)</h4>
+        </div>
+        
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
