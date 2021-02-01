@@ -341,45 +341,43 @@ if($_SESSION['level']=="") {
 <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
 <script src="assets/js/demo.js"></script>
 <script>
-var defaultCenter = {
-    lat : <?=get_option('default_lat')?>, 
-    lng : <?=get_option('default_lng')?>
-};
-function initMap() {
+    var defaultCenter = {
+        lat : <?=get_option('default_lat')?>, 
+        lng : <?=get_option('default_lng')?>
+    };
+    function initMap() {
 
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: <?=get_option('default_zoom')?>,
-    center: defaultCenter 
-  });
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: <?=get_option('default_zoom')?>,
+        center: defaultCenter 
+    });
 
-  var marker = new google.maps.Marker({
-    position: defaultCenter,
-    map: map,
-    title: 'Click to zoom',
-    draggable:true
-  });
-  
-  
-    marker.addListener('drag', handleEvent);
-    marker.addListener('dragend', handleEvent);
-    
-    var infowindow = new google.maps.InfoWindow({
-        content: '<h4>Drag untuk pindah lokasi</h4>'
+    var marker = new google.maps.Marker({
+        position: defaultCenter,
+        map: map,
+        title: 'Click to zoom',
+        draggable:true
     });
     
-    infowindow.open(map, marker);
-}
+    
+        marker.addListener('drag', handleEvent);
+        marker.addListener('dragend', handleEvent);
+        
+        var infowindow = new google.maps.InfoWindow({
+            content: '<h4>Drag untuk pindah lokasi</h4>'
+        });
+        
+        infowindow.open(map, marker);
+    }
 
-function handleEvent(event) {
-    document.getElementById('lat').value = event.latLng.lat();
-    document.getElementById('lng').value = event.latLng.lng();
-}
+    function handleEvent(event) {
+        document.getElementById('lat').value = event.latLng.Math.ceil(lat());
+        document.getElementById('lng').value = event.latLng.lng();
+    }
 
-$(function(){
-    initMap();
-})
+    $(function(){
+        initMap();
+    })
 </script>
-
-
 
 </html>

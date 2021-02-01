@@ -25,51 +25,52 @@ if($_SESSION['level']=="") {
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="assets/css/demo.css" rel="stylesheet" />
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2t66MDpj3mi7QnqPODUOb25VtT6VnOaA&callback=initialize" async defer></script>
-    <script type="text/javascript">
-        var markers = [
-        <?php
-            $sql = mysqli_query($conn, "SELECT * FROM konter_servis");
-            while(($data =  mysqli_fetch_assoc($sql))) {
-        ?>
-        {
-            "latitude": '<?php echo $data['latitude']; ?>',
-            "longitude": '<?php echo $data['longitude']; ?>',
-            "nama_konter": '<?php echo $data['nama_konter']; ?>',
-            "id_konter": '<?php echo $data['id_konter']; ?>'
-        },
-        <?php
-        }
-        ?>
-        ];
-    </script>
-    <script type="text/javascript">
-        window.onload = function () {
+    <script type="text/javascript">   
+        var marker;
+        function initialize(){
+            // Variabel untuk menyimpan informasi lokasi
+            var infoWindow = new google.maps.InfoWindow;
+            //  Variabel berisi properti tipe peta
             var mapOptions = {
-                center: new google.maps.LatLng(-7.7955798,110.3694896),
-                zoom: 13,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
-            }; 
-            var infoWindow = new google.maps.InfoWindow();
-            var map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
-            for (i = 0; i < markers.length; i++) {
-                var data = markers[i];
-                var latnya = data.latitude;
-                var longnya = data.longitude;
-                
-                var myLatlng = new google.maps.LatLng(latnya, longnya);
-                var marker = new google.maps.Marker({
-                    position: myLatlng,
-                    map: map,
-                    title: data.nama_konter
-                });
-                    (function (marker, data) {
-                        google.maps.event.addListener(marker, "click", function (e) {
-                            infoWindow.setContent('<h5>Nama Konter</b> :'+ data.nama_konter +'</h5>'+'<p align="center"><a href="det_toko.php?id_konter='+data.id_konter+'" class="link_detail btn btn-primary">Lihat Detail');
-                            infoWindow.open(map, marker);
-                        });
-                    })(marker, data);              
+            } 
+            // Pembuatan peta
+            var peta = new google.maps.Map(document.getElementById('googleMap'), mapOptions);      
+            // Variabel untuk menyimpan batas kordinat
+            var bounds = new google.maps.LatLngBounds();
+            // Pengambilan data dari database MySQL
+            <?php
+
+            include "../koneksi.php";
+
+            $query = mysqli_query($conn,"SELECT * FROM konter_servis");
+            while ($row = $query->fetch_assoc()) {
+                $nama = $row["nama_konter"];
+                $det  = $row["detail_konter"];
+                $lat  = $row["latitude"];
+                $long = $row["longitude"];
+                echo "addMarker($lat, $long, '$nama');";
             }
-            
+                
+            ?> 
+            // Proses membuat marker 
+            function addMarker(lat, lng, info){
+                var lokasi = new google.maps.LatLng(lat, lng);
+                bounds.extend(lokasi);
+                var marker = new google.maps.Marker({
+                    map: peta,
+                    position: lokasi
+                });       
+                peta.fitBounds(bounds);
+                bindInfoWindow(marker, peta, infoWindow, info);
+            }
+            // Menampilkan informasi pada masing-masing marker yang diklik
+            function bindInfoWindow(marker, peta, infoWindow, html){
+                google.maps.event.addListener(marker, 'click', function() {
+                infoWindow.setContent(html);
+                infoWindow.open(peta, marker);
+            });
+            }
         }
     </script>
 </head>
