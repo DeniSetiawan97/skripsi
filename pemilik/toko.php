@@ -65,7 +65,7 @@ if($_SESSION['level']=="") {
                         </a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="Toko.php">
+                        <a class="nav-link" href="toko.php">
                             <i class="nc-icon nc-notes"></i>
                             <p>Toko</p>
                         </a>
