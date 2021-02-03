@@ -85,7 +85,7 @@ if($_SESSION['level']=="") {
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                 <div class="container-fluid">
-                    <p class="navbar-brand"> Daftar User </>                    
+                    <p class="navbar-brand"> Daftar Pemilik Konter </>                    
                     <div class="collapse navbar-collapse justify-content-end" id="navigation">                        
                         <ul class="navbar-nav ml-auto">                            
                             <li class="nav-item">
@@ -105,8 +105,8 @@ if($_SESSION['level']=="") {
                         <div class="col-md-12">
                             <div class="card strpied-tabled-with-hover">
                                 <div class="card-header ">
-                                    <h4 class="card-title">Daftar User</h4>
-                                    <p class="card-category">Daftar Pemilik Dan Pengunjung Teregistrasi</p>
+                                    <h4 class="card-title">Daftar Pemilik Konter</h4>
+                                    <p class="card-category">Daftar Pemilik Konter Teregistrasi</p>
                                 </div>
                                 <div class="card-body table-full-width table-responsive">
                                     <table class="table table-hover table-striped">

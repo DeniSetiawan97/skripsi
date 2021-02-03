@@ -1,6 +1,14 @@
+<style type="text/css">
+    p {
+        text-indent: 40px;
+        font-size: 1.8rem;
+    }
+    .justify {
+            text-align: justify;
+    }
+ </style>
 <div class="page-header">
     <h1>Sistem Informasi Geografis Pencarian Konter</h1>
 </div>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p class="justify">Website ini dibuat untuk dapat mempermudah anda dalam mencari konter servis handphone di wilayah Yogyakarta. Anda dapat menggunakan berbagai fitur guna untuk mempermudah anda dalam mencari konter dan untuk berkomunikasi secara langsung dengan pemilik atau penanggung jawab konter, dengan memanfaatkan fitur chat via Whatsapp Web yang telah disediakan.</p>
+<p class="justify">Bagi anda pemilik konter servis handphone yang berada di wilayah Yogyakarta, anda dapat dengan mudah mendaftarkan konter servis handphone anda pada website ini. Yang diharap dapat membantu memasarkan jasa anda.</p>

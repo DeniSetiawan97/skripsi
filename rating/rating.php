@@ -4,12 +4,7 @@
     <div>
         <h3>Silahkan Masukkan Penilaian Anda</h3>
     </div>                    
-    <div>
-        <label>Ulasan Anda</label>
-        <div>
-            <textarea name="ulasan" rows="5" cols="40"></textarea>
-        </div>
-    </div>                    
+                       
     <div class="rateyo" id= "rating"
                 data-rateyo-rating="4"
                 data-rateyo-num-stars="5"

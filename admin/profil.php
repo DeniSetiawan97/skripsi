@@ -162,7 +162,7 @@ if($_SESSION['level']=="") {
                                             <div class="col-md-4 px-1">
                                                 <div class="form-group">
                                                     <label>Password</label>
-                                                    <input type="text" class="form-control" name="password" placeholder="Password" value="<?=$data['password'];?>">
+                                                    <input type="password" class="form-control" name="password" placeholder="Password" value="<?=$data['password'];?>">
                                                 </div>
                                             </div>  
                                         </div>

@@ -244,19 +244,3 @@ if($_SESSION['level']=="") {
 <script src="assets/js/demo.js"></script>
 
 </html>
-<div>  
-  <div id="add_data_Modal" class="modal fade">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Silahkan Isi Pesan Anda (Pastikan Sudah Masuk Ke WhatsApp Web)</h4>
-        </div>
-        
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>

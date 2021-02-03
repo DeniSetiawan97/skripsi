@@ -52,7 +52,7 @@
     </nav>
     <div class="container">
     <?php
-            include 'home.php';
+      include 'home.php';
     ?>
     </div>
 

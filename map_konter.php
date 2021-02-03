@@ -84,7 +84,7 @@
         window.onload = function () {
             var mapOptions = {
                 center: new google.maps.LatLng(-7.7955798,110.3694896),
-                zoom: 13,
+                zoom: 12.8,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             }; 
             var infoWindow = new google.maps.InfoWindow();
