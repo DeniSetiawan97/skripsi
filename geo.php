@@ -1,41 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Belajar Ambil Lokasi</title>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-</head>
-<body>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+<?php 
+include "koneksi.php";
+				  
+$q      = $conn->query("SELECT AVG(rate) AS jml FROM reting WHERE id_konter='9'")->fetch_assoc();
+$hasil  = round($q['jml'],1); 
+?>                
+                
+	<div class="rateyo" id= "rating"
+            data-rateyo-rating="<?php echo $hasil; ?>">
+    </div>  
 
-<p>lokasi anda saat ini: <span id="lokasi"></span></p>
-
-<script type="text/javascript">
-	$(document).ready(function() {
-		navigator.geolocation.getCurrentPosition(function (position) {
-   			 tampilLokasi(position);
-		}, function (e) {
-		    alert('Geolocation Tidak Mendukung Pada Browser Anda');
-		}, {
-		    enableHighAccuracy: true
-		});
-	});
-
-	function tampilLokasi(posisi) {
-		//console.log(posisi);
-		var latitude 	= posisi.coords.latitude;
-		var longitude 	= posisi.coords.longitude;
-		$.ajax({
-			type 	: 'POST',
-			url		: 'lokasi.php',
-			data 	: 'latitude='+latitude+'&longitude='+longitude,
-			success	: function (e) {
-				if (e) {
-					$('#lokasi').html(e);
-				}else{
-					$('#lokasi').html('Tidak Tersedia');
-				}
-			}
-		})
-	}
-</script>
-</body>
-</html>
+    <div id="hasil">
+        Rating <?php echo $hasil; ?>
+    </div>

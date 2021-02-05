@@ -12,6 +12,7 @@
     <meta name="author" content="sarjanakomedi.com"/>
     <link rel="icon" href="favicon.ico"/>
     <link rel="canonical" href="https://sarjanakomedi.com/" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <title>Sistem Informasi Geografis</title>
     <link href="assets/css/solar-bootstrap.min.css" rel="stylesheet"/>
@@ -32,6 +33,15 @@
         });
     </script>
     <script src="assets/js/script.js"></script>
+    <script>
+    .on {
+            color: #f7d106
+        }
+
+        .off {
+            color: #ddd;
+        }
+    </script>
   </head>
   <body>
     <nav class="navbar navbar-default navbar-static-top">
@@ -68,6 +78,7 @@
                             <th>No</th>
                             <th>Nama Konter</th>
                             <th>Layanan Antar Jemput</th>
+                            <th>Rating</th>
                             <th>Alamat</th>
                             <th>Aksi</th>                
                         </tr>
@@ -85,16 +96,22 @@
                           $jumlah_data = mysqli_num_rows($data);
                           $total_halaman = ceil($jumlah_data / $batas);
                   
-                          $data_konter = mysqli_query($conn,"select * from konter_servis limit $halaman_awal, $batas");
+                          $data_konter = mysqli_query($conn,"
+                          select konter_servis.id_konter,konter_servis.nama_konter,konter_servis.antar_jemput,konter_servis.alamat,AVG(rate) as rata
+                          from konter_servis
+                          LEFT JOIN reting on reting.id_konter=konter_servis.id_konter 
+                          group by konter_servis.id_konter limit $halaman_awal, $batas");
                           $nomor = $halaman_awal+1;
                           while($d = mysqli_fetch_array($data_konter)){
                         ?>
+                         
                           <tr>
                           <?php
                             
                             echo "<td>".$nomor++."</td>";
                             echo "<td>".$d['nama_konter']."</td>"
                                 ."<td>".$d['antar_jemput']."</td>"
+                                ."<td>".round($d['rata'],1)."</td>"
                                 ."<td>".$d['alamat']."</td>"
                                 ."<td>
                                   <a href='detail_konter.php?id_konter=".$d['id_konter']."' class='btn btn-success'>Lihat detail</a>

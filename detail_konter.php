@@ -150,7 +150,7 @@
             toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
         });
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2t66MDpj3mi7QnqPODUOb25VtT6VnOaA&callback=initialize" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=weekly&key=AIzaSyD2t66MDpj3mi7QnqPODUOb25VtT6VnOaA&region=ID"></script>
     <script type="text/javascript">
         var markers = [
           <?php
